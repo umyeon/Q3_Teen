@@ -164,79 +164,48 @@ body {
   max-width: 500px;
 }
 
-/* 5. Editorial Story Block (매혹과 위험의 Abyss Warning 튜닝) */
+/* 5. Editorial Story Block (지정하신 3대 명품 호러 무드 포인트 반영) */
 .story-block {
   display: flex;
   flex-direction: row; 
-  gap: 28px;
+  gap: 32px;
   width: 100%;
   max-width: 640px;
-  margin: 130px auto 30px;
-  padding: 45px 28px;
+  margin: 140px auto 40px;
+  padding: 50px 32px;
   align-items: stretch; 
-  background: #020202; /* 칠흑의 금기 구역 */
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden; /* 내부 레이어 안개 가두기 */
-  border: 1px solid rgba(255, 30, 30, 0.15); /* 경고의 불길한 핏빛 미세 보더 */
-  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.45);
+  background: #111112; /* [포인트 1] 서늘하고 무거운 미드나잇 차콜 묵색 블록 */
+  border-radius: 0; /* [포인트 1] 촌스러운 라운딩을 칼같이 잘라낸 완벽한 직각 단면 */
+  border-left: 4px solid #6b1a1a; /* [포인트 2] 결계를 상징하는 말라붙은 핏빛 버건디 솔리드 선 */
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
 }
 
-/* 아름답고 불길한 독기 안개가 텍스트 배후에서 움직이는 효과 */
-.story-block::before {
-  content: '';
-  position: absolute;
-  inset: -10%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.18) 0%, transparent 55%),
-    radial-gradient(circle at 80% 70%, rgba(255, 30, 30, 0.16) 0%, transparent 55%);
-  z-index: 1;
-  filter: blur(10px);
-  animation: danger-mist-move 7s infinite alternate ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes danger-mist-move {
-  0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 0.8; }
-  100% { transform: scale(1.15) translate(15px, -15px) rotate(5deg); opacity: 1; }
-}
-
-/* 내부 콘텐츠들을 안개 레이어 위로 강제 인상 */
-.vertical-title, .vertical-line, .editorial-text {
-  position: relative;
-  z-index: 2;
-}
-
-/* 세로 타이틀 유혹의 보라빛 오라 추가 */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-family: 'Noto Serif KR', serif;
   font-weight: 900;
-  font-size: clamp(22px, 4.5vw, 32px);
-  color: #f4f0e6; 
-  letter-spacing: 0.12em;
+  font-size: clamp(22px, 4.5vw, 30px);
+  color: #e5e5e0; 
+  letter-spacing: 0.18em; /* [포인트 3] 고독하고 기묘한 긴장감을 주는 자간 확장 */
   line-height: 1.0;
   flex-shrink: 0;
-  text-shadow: 0 0 12px rgba(138, 43, 226, 0.6); /* 매혹적인 보라색 독기 잔상 */
+  text-shadow: none; /* [포인트 3] 번쩍이는 인위적 그림자 오라 완벽 소거 */
 }
 
-/* 유혹(보라)에서 위험(핏빛)으로 타들어가는 결계형 네온 세로선 */
 .vertical-line {
-  width: 2px;
-  background: linear-gradient(to bottom, #9d33ea 0%, #ff1e1e 100%);
-  box-shadow: 0 0 10px rgba(255, 30, 30, 0.6); /* 넘어올 수 없는 선을 뜻하는 강한 발광 */
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08); /* 타이틀과 본문을 깔끔하게 가르는 최소한의 내측 분리선 */
   flex-shrink: 0;
   align-self: stretch;
 }
 
-/* 서늘한 유령 실버 바이올렛 서체 튜닝 */
 .editorial-text {
   flex: 1;
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(13.5px, 3.8vw, 16.5px); 
-  line-height: 2.1;
-  color: #e2dde5; /* 안개에 잠겨 가독성을 보존하는 서늘한 애쉬 라벤더 */
+  font-size: clamp(13.5px, 3.8vw, 16px); 
+  line-height: 2.3; /* [포인트 3] 숨이 막힐 듯 서사적인 공백을 자아내는 시집 형태의 넓은 행간 */
+  color: #b5b5be; /* 눈이 편안하면서 차분히 가라앉은 섀도우 실버 */
   font-weight: 400;
   padding-top: 2px;
   word-break: keep-all; 
@@ -296,6 +265,7 @@ hr.divider {
   box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22);
 }
 
+/* 안전한 CSS 스켈레톤 형태의 이미지 홀더 백그라운드 */
 .cover {
   width: 78px;
   height: 110px;
@@ -348,8 +318,8 @@ hr.divider {
   }
   .story-block {
     margin-top: 110px; 
-    padding: 36px 18px;
-    gap: 16px;
+    padding: 38px 20px;
+    gap: 18px;
   }
   .card { padding: 16px; gap: 16px; }
   .cover { width: 68px; height: 96px; }
