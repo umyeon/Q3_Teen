@@ -10,8 +10,8 @@
 <style>
 body{
     margin:0;
-    background:#f6f4f1;
-    color:#222;
+    background:#000;
+    color:#fff;
     font-family:'Pretendard',sans-serif;
 }
 
@@ -21,7 +21,6 @@ body{
     padding:24px 16px 80px;
 }
 
-/* 청소년실 버전은 초록 원 제거 */
 .hero{
     position:relative;
 }
@@ -39,33 +38,38 @@ body{
     display:inline-flex;
     padding:8px 14px;
     border-radius:999px;
-    background:#2f2f2f;
-    color:#fff;
+    background:#fff;
+    color:#000;
     font-size:11px;
+    font-weight:600;
 }
 
 .hero-title{
-    font-size:57px;
-    line-height:1.1;
-    letter-spacing:-0.05em;
-    color:#222;
-    font-weight:800;
-    margin:28px 0;
+    font-size:22px;
+    font-weight:400;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:#bdbdbd;
+    margin:40px 0 12px;
+    white-space:nowrap;
 }
 
 .hero-question{
-    font-size:24px;
-    font-weight:700;
-    line-height:1.45;
-    margin-top:64px;
-    text-align:right;
-    color:#333;
+    font-size:clamp(42px,8vw,72px);
+    font-weight:800;
+    line-height:1;
+    margin:0 0 48px;
+    text-align:left;
+    white-space:nowrap;
+    letter-spacing:-0.05em;
+    color:#fff;
 }
 
 .hero-text{
-    line-height:1.95;
-    color:#444;
-    text-align:right;
+    line-height:2;
+    color:#d0d0d0;
+    text-align:left;
+    max-width:560px;
 }
 
 .notice{
@@ -74,10 +78,11 @@ body{
     justify-content:center;
     margin:40px 0 12px;
     padding:14px 16px;
-    background:#fafaf8;
-    border:1px solid #d9d9d5;
+    background:#111;
+    border:1px solid #333;
     border-radius:14px;
     font-size:13px;
+    color:#d0d0d0;
     letter-spacing:-0.03em;
     white-space:nowrap;
     text-overflow:ellipsis;
@@ -90,18 +95,18 @@ body{
 
 .section-no{
     font-size:12px;
-    color:#7a7a7a;
+    color:#888;
     letter-spacing:.18em;
 }
 
 .section-title{
     font-size:34px;
     font-weight:700;
-    color:#222;
+    color:#fff;
 }
 
 .section-desc{
-    color:#6b6b6b;
+    color:#aaa;
 }
 
 .card{
@@ -126,6 +131,7 @@ body{
     font-weight:700;
     margin-bottom:6px;
     line-height:1.35;
+    color:#202020;
 }
 
 .author{
@@ -154,19 +160,16 @@ body{
 </div>
 
 <h1 class='hero-title'>
-Where<br>
-Secrets Grow
+    Where Secrets Grow
 </h1>
 
 <p class='hero-question'>
-어둠 속의 목격자들
+    어둠 속의 목격자들
 </p>
 
 <div class='hero-text'>
 
-<p>
-어떤 문은 열지 않는 편이 좋습니다.
-</p>
+<p>어떤 문은 열지 않는 편이 좋습니다.</p>
 
 <p>
 어떤 이름은 부르지 않는 편이 좋고,<br>
@@ -186,12 +189,6 @@ Secrets Grow
 이야기 속으로 여러분을 초대합니다.
 </p>
 
-</div>
-
-</section>
-
-<div class='notice'>
-📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.
 </div>
 
 <!-- 아래 SECTION 01~03 및 카드 영역은 기존 코드 그대로 유지 -->
