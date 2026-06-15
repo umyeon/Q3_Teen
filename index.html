@@ -3,324 +3,331 @@
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>어둠 속의 목격자들 — 우면도서관 북큐레이션</title>
+<title>어둠 속의 목격자들 — 프리미엄 에디토리얼</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
 <style>
-/* ════════════════════════════════
-   기본 스타일 및 초기화
-   ════════════════════════════════ */
+/* 기본 초기화 */
 *{box-sizing:border-box;margin:0;padding:0}
-
 body{
-  background:#efede8; /* 현실 세계: 단정하고 밝은 에디토리얼 베이지 */
-  color:#222222;
+  background:#f4f2ed;
+  color:#111111;
   font-family:'Pretendard', sans-serif;
-  transition: background 0.3s;
+  overflow-x: hidden;
 }
 
 /* ════════════════════════════════
-   시네마틱 히어로 섹션 (미스테리 포탈)
+   고급 디테일 1: 필름 노이즈(Grain) 텍스처
    ════════════════════════════════ */
+.noise-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  content: "";
+  opacity: 0.04; /* 아주 미세하게 배치 */
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 시네마틱 히어로 */
 .hero{
-  background:#efede8;
-  padding:40px 24px 60px;
+  background:#f4f2ed;
+  padding:60px 24px 80px;
   display:flex;
   flex-direction:column;
   align-items:center;
   position:relative;
 }
 
-/* 큐레이션 배지 */
 .eyebrow-wrap{
   width:100%;
-  max-width:640px;
+  max-width:680px;
   display:flex;
-  justify-content:flex-end;
-  margin-bottom:30px;
+  justify-content:space-between;
+  align-items: center;
+  margin-bottom:40px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  padding-bottom: 12px;
 }
 .eyebrow{
-  display:inline-flex;
-  padding:7px 16px;
-  border-radius:999px;
-  background:#111111;
-  color:#ffffff;
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:.05em;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform: uppercase;
+  color: #666;
 }
 
-/* 거대한 심연의 아치문 (Portal) */
-.portal-abyss {
+/* ════════════════════════════════
+   고급 디테일 2: 심연의 다층 아치 프레임
+   ════════════════════════════════ */
+.portal-container {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  height: 720px;
-  background: #000000; /* 완전히 비어있는 칠흑 같은 암흑 */
-  border-radius: 300px 300px 0 0; /* 압도적인 석조 아치 형태 */
-  box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+  max-width: 640px;
+  height: 760px;
+  background: #000000;
+  border-radius: 320px 320px 0 0;
+  box-shadow: 
+    0 40px 90px rgba(0,0,0,0.3),
+    inset 0 0 50px rgba(92, 212, 72, 0.1); /* 안쪽으로 스며드는 불길한 초록 안개 */
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 180px 32px 0;
+  padding: 200px 40px 0;
 }
 
-/* 모순 1: 어둠 속에서 빛나는 불길한 잔상들 (독버섯과 나비의 추상화) */
-.portal-abyss::before {
-  content: '';
-  position: absolute;
-  bottom: 80px;
-  left: 8%;
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle, rgba(255,40,40,0.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-.portal-abyss::after {
+/* 고급 디테일 3: 숨쉬는 유기적 불빛 애니메이션 (독버섯/나비) */
+.portal-container::before {
   content: '';
   position: absolute;
   bottom: 120px;
-  right: 5%;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,150,0,0.15) 0%, rgba(140,40,255,0.12) 50%, transparent 70%);
+  left: -20px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255, 30, 30, 0.25) 0%, transparent 70%);
+  animation: eerie-pulse 9s infinite ease-in-out alternate;
+  pointer-events: none;
+}
+.portal-container::after {
+  content: '';
+  position: absolute;
+  top: 150px;
+  right: -40px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 136, 0, 0.15) 0%, rgba(138, 43, 226, 0.18) 50%, transparent 70%);
+  animation: eerie-pulse 12s infinite ease-in-out alternate-reverse;
   pointer-events: none;
 }
 
-/* 아치 한가운데 외롭게 떠 있는 서브 카피 */
-.floating-copy {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 300;
-  font-size: clamp(20px, 4.5vw, 26px);
-  line-height: 1.8;
-  color: #f4f0e6;
-  text-align: center;
-  letter-spacing: 0.02em;
-  z-index: 5;
-  text-shadow: 0 0 20px rgba(255,255,255,0.1);
+@keyframes eerie-pulse {
+  0% { transform: scale(0.9) translate(0, 0); opacity: 0.7; }
+  100% { transform: scale(1.1) translate(20px, -10px); opacity: 1; }
 }
 
-/* 모순 2: 하단의 이질적이고 쨍한 동화풍 형광 초록 바닥 */
+/* 심연 속 고독한 타이포그래피 */
+.floating-copy {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 200;
+  font-size: clamp(22px, 5vw, 28px);
+  line-height: 2.0;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.05em;
+  z-index: 5;
+  animation: text-float 6s infinite ease-in-out;
+}
+
+@keyframes text-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* 쨍한 동화 속 바닥 */
 .abyss-floor {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 240px;
-  /* 동화의 화사함과 심연의 경계를 극단적으로 대조시키는 네온 그린 그라디언트 */
-  background: linear-gradient(to top, #2fa339 0%, #5cd448 45%, rgba(0,0,0,0) 100%);
+  bottom: 0; left: 0; right: 0;
+  height: 260px;
+  background: linear-gradient(to top, #1b8524 0%, #5cd448 50%, rgba(0,0,0,0) 100%);
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 36px;
   z-index: 4;
 }
 
-/* 바닥을 뚫고 나올 듯 거대한 메인 영문 타이틀 */
+/* ════════════════════════════════
+   고급 디테일 4: 글자 반전 기법 (mix-blend-mode)
+   ════════════════════════════════ */
 .main-title-eng {
   font-family: 'Pretendard', sans-serif;
-  font-weight: 800;
-  font-size: clamp(38px, 8.5vw, 64px);
+  font-weight: 900;
+  font-size: clamp(42px, 9vw, 72px);
   color: #ffffff;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   text-align: center;
-  white-space: nowrap;
+  transform: translateY(35px); /* 경계선에 절묘하게 걸치도록 유도 */
+  z-index: 10;
+  mix-blend-mode: exclusion; /* 배경색에 따라 글자색이 이질적으로 왜곡됨 */
 }
 
-/* ════════════════════════════════
-   스토리 텍스트 블록 (에디토리얼 레이아웃)
-   ════════════════════════════════ */
+/* 에디토리얼 스토리 블록 */
 .story-block {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 40px;
+  grid-template-columns: 100px 1fr;
+  gap: 50px;
   width: 100%;
-  max-width: 600px;
-  margin: 70px auto 20px;
+  max-width: 640px;
+  margin: 100px auto 30px;
   align-items: start;
 }
 
-/* 이정표처럼 수직으로 서 있는 한글 타이틀 */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-family: 'Pretendard', sans-serif;
   font-weight: 900;
-  font-size: clamp(26px, 5vw, 34px);
+  font-size: clamp(28px, 5vw, 36px);
   color: #111111;
-  letter-spacing: 0.08em;
-  line-height: 1.1;
-  border-left: 1px solid #111111;
-  padding-left: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.0;
+  border-left: 2px solid #111111;
+  padding-left: 15px;
 }
 
-/* 정갈한 명조체 본문 */
 .editorial-text {
   font-family: 'Noto Serif KR', serif;
-  font-size: 17px;
-  line-height: 2.2;
-  color: #2c2c2c;
+  font-size: 16.5px;
+  line-height: 2.3;
+  color: #2b2b2b;
   font-weight: 400;
 }
 .editorial-text p {
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
-.editorial-text p:last-child {
-  margin-bottom: 0;
-}
+.editorial-text p:last-child { margin-bottom: 0; }
 
-/* ════════════════════════════════
-   구분선 및 본문 도서 리스트
-   ════════════════════════════════ */
+/* 본문 리스트 */
 hr.divider{
   border:none;
-  border-top:1px solid rgba(0, 0, 0, 0.1);
-  margin:40px 0 0;
+  border-top:1px solid rgba(0, 0, 0, 0.08);
+  margin:60px 0 0;
 }
 
 .notice{
   max-width: 760px;
-  margin: 30px auto 10px;
-  padding:14px 20px;
-  background: rgba(0, 0, 0, 0.03);
-  border:1px solid rgba(0, 0, 0, 0.06);
-  border-radius:12px;
-  font-size:13px;
-  color:#555555;
-  letter-spacing:-.01em;
+  margin: 40px auto 10px;
+  padding: 16px 24px;
+  background: #ffffff;
+  border: 1px dashed rgba(0,0,0,0.15);
+  border-radius: 8px;
+  font-size: 13px;
+  color: #555555;
+  text-align: center;
 }
 
 .wrap{
   max-width:760px;
   margin:auto;
-  padding:0 16px 100px;
+  padding:0 16px 120px;
 }
 
-.section{
-  margin-top:70px;
-}
+.section{ margin-top: 90px; }
 .section-no{
   font-size:11px;
   color:#8a8075;
-  letter-spacing:.25em;
-  font-weight: 600;
-  margin-bottom:6px;
+  letter-spacing:.3em;
+  font-weight: 700;
+  margin-bottom:8px;
 }
 .section-title{
   font-family:'Noto Serif KR', serif;
-  font-size:28px;
+  font-size:32px;
   font-weight:700;
   color:#111111;
-  margin-bottom:4px;
+  margin-bottom:6px;
 }
 .section-desc{
   font-size:14px;
-  color:#6a6157;
-  margin-bottom:24px;
+  color:#666666;
+  margin-bottom:32px;
 }
 
-/* 에디토리얼 감성의 모던 카드 스타일 */
+/* ════════════════════════════════
+   고급 디테일 5: 심연의 잔상이 번지는 호버 이펙트
+   ════════════════════════════════ */
 .card{
   display:flex;
-  gap:24px;
+  gap:28px;
   align-items:center;
   background:#ffffff;
-  border:1px solid rgba(0, 0, 0, 0.05);
+  border:1px solid rgba(0, 0, 0, 0.04);
   border-radius:16px;
-  padding:20px;
-  margin:16px 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.015);
-  transition: transform 0.25s, box-shadow 0.25s;
+  padding:24px;
+  margin:20px 0;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.01);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 .card:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-  background: #faf9f6;
+  transform: translateY(-5px);
+  /* 마우스를 올리면 동화 속 불길한 초록빛이 은은하게 카드를 감싸며 왜곡을 연결함 */
+  box-shadow: 0 20px 40px rgba(92, 212, 72, 0.12);
+  border-color: rgba(92, 212, 72, 0.3);
+  background: #fafbfa;
 }
 
 .cover{
-  width:80px;
-  height:114px;
+  width:85px;
+  height:120px;
   object-fit:cover;
-  border-radius:8px;
+  border-radius:6px;
   flex-shrink:0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
 }
+.card:hover .cover {
+  transform: scale(1.03) rotate(-1deg);
+}
+
 .title{
   font-family:'Noto Serif KR', serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight:700;
-  margin-bottom:6px;
+  margin-bottom:8px;
   line-height:1.4;
   color:#111111;
 }
 .author{
   font-size:13px;
   color:#666666;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 .call{
   display: inline-block;
   font-size:11px;
   font-weight: 600;
-  color:#8a8075;
-  background: #f0ede8;
-  padding: 2px 8px;
+  color:#73695e;
+  background: #edeae4;
+  padding: 3px 10px;
   border-radius: 4px;
+  letter-spacing: 0.02em;
 }
 
-/* ════════════════════════════════
-   반응형 모바일 모드
-   ════════════════════════════════ */
+/* 반응형 모바일 */
 @media(max-width:600px){
-  .portal-abyss {
-    height: 560px;
-    padding-top: 130px;
-  }
-  .abyss-floor {
-    height: 180px;
-    padding-bottom: 24px;
-  }
-  .story-block {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 8px;
-  }
+  .portal-container { height: 580px; padding-top: 140px; }
+  .abyss-floor { height: 200px; }
+  .main-title-eng { transform: translateY(25px); }
+  .story-block { grid-template-columns: 1fr; gap: 24px; }
   .vertical-title {
     writing-mode: horizontal-tb;
     border-left: none;
     border-bottom: 2px solid #111111;
-    padding-left: 0;
-    padding-bottom: 8px;
-    display: inline-block;
-    width: fit-content;
+    padding-left: 0; padding-bottom: 6px;
+    display: inline-block; width: fit-content;
   }
-  .card {
-    padding: 16px;
-    gap: 16px;
-  }
-  .cover {
-    width: 68px;
-    height: 96px;
-  }
+  .card { padding: 20px; gap: 20px; }
 }
 </style>
 </head>
 
 <body>
 
+<div class="noise-overlay"></div>
+
 <section class='hero'>
   <div class='eyebrow-wrap'>
-    <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
+    <div class='eyebrow'>우면도서관 북큐레이션</div>
+    <div class='eyebrow' style="color:#5cd448;">youth room</div>
   </div>
 
-  <div class='portal-abyss'>
+  <div class='portal-container'>
     <div class='floating-copy'>
       모든 비밀은<br>누군가의 발견을 기다린다
     </div>
@@ -437,4 +444,66 @@ hr.divider{
     
     <div class='card'>
       <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/423172830/423172828/9791173324253' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt='AI 시대, 강력한 개인이 온다'>
+      </a>
+      <div>
+        <div class='title'>AI 시대, 강력한 개인이 온다</div>
+        <div class='author'>구본권</div>
+        <div class='call'>331.544 구45ㅇ</div>
+      </div>
+    </div>
+  </section>
+
+  <section class='section'>
+    <div class='section-no'>SECTION 03</div>
+    <div class='section-title'>미래</div>
+    <div class='section-desc'>노동의 미래를 상상하다</div>
+    
+    <div class='card'>
+      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417559632/417559610/9788925577647' target='_blank' rel='noopener noreferrer'>
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925577647.jpg' alt='일의 역사'>
+      </a>
+      <div>
+        <div class='title'>일의 역사</div>
+        <div class='author'>제임스 수즈먼</div>
+        <div class='call'>321.509 수77ㅇ</div>
+      </div>
+    </div>
+    
+    <div class='card'>
+      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417617397/417617370/9791191183030' target='_blank' rel='noopener noreferrer'>
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191183030.jpg' alt='새로운 가난이 온다'>
+      </a>
+      <div>
+        <div class='title'>새로운 가난이 온다</div>
+        <div class='author'>김만권</div>
+        <div class='call'>334 김32ㅅ</div>
+      </div>
+    </div>
+    
+    <div class='card'>
+      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'>
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득'>
+      </a>
+      <div>
+        <div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div>
+        <div class='author'>앤디 스턴 외</div>
+        <div class='call'>321.5 스884ㄴ</div>
+      </div>
+    </div>
+    
+    <div class='card'>
+      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434372/417434354/9791143003225' target='_blank' rel='noopener noreferrer'>
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791143003225.jpg' alt='AI와 지속 가능한 노동'>
+      </a>
+      <div>
+        <div class='title'>AI와 지속 가능한 노동</div>
+        <div class='author'>김주희</div>
+        <div class='call'>321.5 김76ㅇ</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
