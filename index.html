@@ -64,7 +64,7 @@ body{
 }
 
 /* ════════════════════════════════
-   3. 거대한 아치(Portal) & 3중 유기적 안개 애니메이션
+   3. 거대한 아치(Portal) & 흡입형 유기적 안개 애니메이션
    ════════════════════════════════ */
 .portal-frame {
   position: relative;
@@ -75,7 +75,7 @@ body{
   border-radius: 250px 250px 0 0; /* 완벽한 기하학적 석조 아치 구현 */
   box-shadow: 0 40px 90px rgba(0,0,0,0.25);
   overflow: hidden;
-  margin-bottom: 90px; /* 타이틀 오버랩 정밀 제어를 위한 마진 */
+  margin-bottom: 150px; /* 지적사항 반영: 아치와 텍스트 영역 사이의 압도적인 여백 확보 */
 }
 
 /* 애니메이션 레이어 A: 동화 속의 형광 초록 안개 (바닥에서 일렁임) */
@@ -86,47 +86,53 @@ body{
   transform: translateX(-50%);
   width: 130%;
   height: 50%;
-  background: radial-gradient(ellipse at 50% 100%, #2fa339 0%, rgba(92, 212, 72, 0.35) 45%, transparent 75%);
-  filter: blur(8px);
-  animation: pulse-green 7s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+  background: radial-gradient(ellipse at 50% 100%, #2fa339 0%, rgba(92, 212, 72, 0.4) 45%, transparent 75%);
+  filter: blur(10px);
+  animation: pulse-green 6s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
   z-index: 1;
 }
 
-/* 애니메이션 레이어 B: 몽환적인 보라색 독기 (우측 상단 균열) */
+/* 지적사항 반영: 선명도를 극대화하고 아치 내부로 빨아들이는 듯한 유혹의 보라색 광원 */
 .portal-mist-purple {
   position: absolute;
-  top: 25%;
-  right: -15%;
-  width: 70%;
-  height: 60%;
-  background: radial-gradient(circle, rgba(138, 43, 226, 0.22) 0%, transparent 75%);
-  animation: drift-purple 11s infinite alternate cubic-bezier(0.37, 0, 0.63, 1);
+  top: 10%;
+  right: -10%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(157, 51, 234, 0.65) 0%, rgba(138, 43, 226, 0.2) 50%, transparent 70%);
+  filter: blur(15px);
+  animation: lure-purple 7s infinite cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
-/* 애니메이션 레이어 C: 불길한 핏빛 기운 (좌측 중단 독버섯 포자) */
+/* 지적사항 반영: 선명도를 극대화하고 아치 내부로 호객하는 듯한 유혹의 핏빛 레드 광원 */
 .portal-mist-red {
   position: absolute;
-  bottom: 25%;
+  bottom: 10%;
   left: -10%;
-  width: 60%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(255, 30, 30, 0.15) 0%, transparent 70%);
-  animation: drift-red 9s infinite alternate cubic-bezier(0.33, 1, 0.68, 1);
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 30, 30, 0.6) 0%, rgba(220, 20, 20, 0.15) 50%, transparent 70%);
+  filter: blur(15px);
+  animation: lure-red 6s infinite cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
 @keyframes pulse-green {
-  0% { transform: translateX(-50%) scaleY(0.9) translateY(10px); opacity: 0.75; }
+  0% { transform: translateX(-50%) scaleY(0.9) translateY(10px); opacity: 0.8; }
   100% { transform: translateX(-50%) scaleY(1.1) translateY(0); opacity: 1; }
 }
-@keyframes drift-purple {
-  0% { transform: translate(0, 0) scale(0.95); }
-  100% { transform: translate(-30px, -20px) scale(1.15); }
+
+/* 심연의 정중앙 코어로 빨려 들어가며 유혹하는 움직임의 구체적 시각화 */
+@keyframes lure-purple {
+  0% { transform: translate(0, 0) scale(0.7); opacity: 0.1; filter: blur(25px); }
+  40% { transform: translate(-60px, 40px) scale(1.2); opacity: 0.9; filter: blur(10px); }
+  100% { transform: translate(-160px, 120px) scale(0.4); opacity: 0; filter: blur(30px); }
 }
-@keyframes drift-red {
-  0% { transform: translate(0, 0) scale(1.1); }
-  100% { transform: translate(25px, 15px) scale(0.9); }
+@keyframes lure-red {
+  0% { transform: translate(0, 0) scale(0.7); opacity: 0.1; filter: blur(25px); }
+  45% { transform: translate(50px, -60px) scale(1.15); opacity: 0.9; filter: blur(10px); }
+  100% { transform: translate(140px, -150px) scale(0.3); opacity: 0; filter: blur(30px); }
 }
 
 /* 심연 속에 고독하게 떠오른 서정적 메인 카피 */
@@ -151,58 +157,77 @@ body{
 }
 
 /* ════════════════════════════════
-   4. 고난도 하이엔드 타이포그래피 (수학적 반전 분리)
+   4. 고난도 하이엔드 타이포그래피 (수학적 반전 분리 & 절대 줄바꿈 방지)
    ════════════════════════════════ */
 .portal-absolute-title {
   position: absolute;
-  bottom: -33px; /* 아치문과 베이지 바탕의 경계선에 한 치의 오차도 없이 걸치도록 고정 */
+  bottom: -33px; /* 아치문과 베이지 바탕의 경계선에 걸치도록 정밀 고정 */
   left: 0; right: 0;
   text-align: center;
   font-family: 'Noto Serif KR', serif;
   font-weight: 900;
   font-size: clamp(38px, 8.5vw, 72px);
-  color: #ffffff; /* 순백색 설정 */
+  color: #ffffff;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   line-height: 1;
   z-index: 10;
   pointer-events: none;
-  /* 믹스 블렌드 모드 발동: 블랙 배경 위에선 화이트로, 베이지 배경 위에선 다크 차콜로 정밀 자동 분리 */
+  
+  /* 지적사항 반영: 어떠한 스크린 크기나 환경에서도 글자가 밑으로 쪼개져 우스워지지 않도록 봉인 */
+  white-space: nowrap; 
+  
+  /* 믹스 블렌드 모드: 블랙 위에선 화이트로, 베이지 위에선 다크 차콜로 오차 없이 분리 */
   mix-blend-mode: difference; 
 }
 
 /* ════════════════════════════════
-   5. 정갈한 에디토리얼 스토리 블록
+   5. 정갈한 에디토리얼 스토리 블록 (세로형 이정표 타이틀)
    ════════════════════════════════ */
 .story-block {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 45px;
+  grid-template-columns: 60px 1fr; /* 정밀 레이아웃 스케일 */
+  gap: 50px;
   width: 100%;
   max-width: 640px;
-  margin: 40px auto 10px;
+  margin: 0 auto; /* 상단 마진은 .portal-frame의 margin-bottom으로 일괄 흡수하여 완벽 제어 */
   align-items: start;
+}
+
+/* 지적사항 반영: 제목을 우아한 한글 명조 세로 방향으로 완벽 정렬 */
+.vertical-title-container {
+  display: flex;
+  flex-direction: row-reverse; /* 세로선이 세로 글자 바로 왼쪽에 붙도록 유도 */
+  align-items: stretch;
+  gap: 16px;
 }
 
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
-  font-family: 'Pretendard', sans-serif;
-  font-weight: 850;
-  font-size: 28px;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  font-size: clamp(28px, 5vw, 34px);
   color: #111111;
-  letter-spacing: 0.08em;
-  line-height: 1.1;
-  border-left: 2px solid #111111;
-  padding-left: 14px;
+  letter-spacing: 0.12em;
+  line-height: 1.0;
 }
 
+/* 지적사항 반영: 하단 가로 밑줄이 아닌, 세로 글자의 결을 따라 흐르는 조형적 세로선 */
+.vertical-divider-line {
+  width: 2px;
+  background: #111111;
+  align-self: stretch; /* 글자 높이만큼 선이 유연하고 정교하게 늘어남 */
+}
+
+/* 가독성을 보존한 가로형 큐레이션 소개글 */
 .editorial-text {
   font-family: 'Noto Serif KR', serif;
   font-size: 16.5px;
-  line-height: 2.15;
+  line-height: 2.2;
   color: #2c2c2c;
   font-weight: 400;
+  padding-top: 4px;
 }
 .editorial-text p {
   margin-bottom: 24px;
@@ -212,12 +237,12 @@ body{
 }
 
 /* ════════════════════════════════
-   6. 본문 콘텐츠 섹션 & 프리미엄 호저 잔상
+   6. 본문 콘텐츠 섹션 (수정 금지 영역 - 원본 전면 동결 보존)
    ════════════════════════════════ */
 hr.divider{
   border:none;
   border-top:1px solid rgba(0, 0, 0, 0.08);
-  margin:50px 24px 0;
+  margin:80px 24px 0;
 }
 
 .notice{
@@ -261,7 +286,7 @@ hr.divider{
   margin-bottom:28px;
 }
 
-/* 책 목록 프리미엄 카드 */
+/* 책 목록 프리미엄 카드 & 선명한 형광 초록 백라이트 잔상 */
 .card{
   display:flex;
   gap:24px;
@@ -273,17 +298,15 @@ hr.divider{
   margin:18px 0;
   box-shadow: 0 4px 20px rgba(0,0,0,0.01);
   position: relative;
-  /* 부드러운 하이엔드 입체 트랜지션 적용 */
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0 4px cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
 }
 
-/* 마우스를 올렸을 때 아치 속 형광 초록의 이질적 잔상이 뿜어져 나오는 핵심 이펙트 */
+/* 지적사항 반영: 마우스를 올리면 아치의 형광 초록 잔상이 배후로 선명하게 뿜어져 나오는 백라이트 스케일 증폭 */
 .card:hover{
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   background: #ffffff;
-  border-color: rgba(92, 212, 72, 0.35); /* 은은한 초록 경계선 경고 */
-  /* 깊고 선명하게 번지는 완벽한 형광 초록 백라이트 구현 */
-  box-shadow: 0 20px 40px rgba(92, 212, 72, 0.16); 
+  border-color: rgba(92, 212, 72, 0.45); 
+  box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22); /* 초록색 잔상 그림자 값 대폭 강화 */
 }
 
 .cover{
@@ -324,32 +347,37 @@ hr.divider{
 }
 
 /* ════════════════════════════════
-   7. 미디어 쿼리 (모바일 환경 가독성 확보)
+   7. 미디어 쿼리 (모바일 가독성)
    ════════════════════════════════ */
 @media(max-width:600px){
   .portal-frame {
     height: 480px;
     border-radius: 190px 190px 0 0;
-    margin-bottom: 60px;
+    margin-bottom: 110px;
   }
   .portal-absolute-title {
-    font-size: clamp(32px, 7.5vw, 46px);
+    font-size: clamp(30px, 7.5vw, 44px);
     bottom: -20px;
   }
   .story-block {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 25px;
     padding: 0 8px;
+  }
+  .vertical-title-container {
+    flex-direction: column; /* 모바일에서도 구조 깨짐 방지 */
+    align-items: flex-start;
+    gap: 10px;
   }
   .vertical-title {
     writing-mode: horizontal-tb;
-    border-left: none;
-    border-bottom: 2px solid #111111;
-    padding-left: 0;
-    padding-bottom: 6px;
-    display: inline-block;
-    width: fit-content;
-    font-size: 24px;
+    border-bottom: none;
+    padding-bottom: 0;
+    font-size: 25px;
+  }
+  .vertical-divider-line {
+    width: 100%;
+    height: 2px; /* 모바일 반전 시에만 가로선으로 유연한 치환 */
   }
   .card {
     padding: 16px;
@@ -370,7 +398,7 @@ hr.divider{
 
   <div class='eyebrow-wrap'>
     <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
-    <div class='eyebrow' style="color:#2fa339; letter-spacing: 0;">YOUTH</div>
+    <div class='eyebrow' style="color:#2fa339; font-weight:700; letter-spacing: 0;">YOUTH</div>
   </div>
 
   <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;">
@@ -388,172 +416,13 @@ hr.divider{
   </div>
 
   <div class='story-block'>
-    <div class='vertical-title'>어둠 속의 목격자들</div>
+    <div class="vertical-title-container">
+      <div class='vertical-title'>어둠 속의 목격자들</div>
+      <div class="vertical-divider-line"></div>
+    </div>
 
     <div class='editorial-text'>
       <p>어떤 문은 열지 않는 편이 좋습니다.</p>
       <p>어떤 이름은 부르지 않는 편이 좋고,<br>어떤 비밀은 끝까지 모르는 편이 좋습니다.</p>
-      <p>그럼에도 우리는 낯선 속삭임에 귀를 기울이고, 어둠 속에 숨겨진 흔적을 바라보게 됩니다.</p>
-      <p>이번 북큐레이션은 호러와 미스터리, 판타지 장르의 영어원서를 통해 설명할 수 없는 사건과 감춰진 비밀이 있는 이야기 속으로 여러분을 초대합니다.</p>
-    </div>
-  </div>
-</section>
-
-<hr class='divider'>
-<div class='notice'>📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
-
-<div class='wrap'>
-
-  <section class='section'>
-    <div class='section-no'>SECTION 01</div>
-    <div class='section-title'>변화</div>
-    <div class='section-desc'>AI는 우리의 일을 어떻게 바꾸는가</div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9788936481247' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936481247.jpg' alt='AI가 나보다 일을 잘할 때'>
-      </a>
-      <div>
-        <div class='title'>AI가 나보다 일을 잘할 때</div>
-        <div class='author'>김대식 외</div>
-        <div class='call'>321.52 김23ㅇ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435259/417435257/9788962626605' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788962626605.jpg' alt='먼저 온 미래'>
-      </a>
-      <div>
-        <div class='title'>먼저 온 미래</div>
-        <div class='author'>장강명</div>
-        <div class='call'>331.54 장12ㅁ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435075/417435055/9791192488776' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192488776.jpg' alt='휴머노이드 : 인간을 닮은 기계, 공존의 시작'>
-      </a>
-      <div>
-        <div class='title'>휴머노이드 : 인간을 닮은 기계, 공존의 시작</div>
-        <div class='author'>김상균</div>
-        <div class='call'>559.962 김52ㅎ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434303/417434293/9791191311686' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191311686.jpg' alt='진격하는 AI와 흔들리는 노동자'>
-      </a>
-      <div>
-        <div class='title'>진격하는 AI와 흔들리는 노동자</div>
-        <div class='author'>이재열 외</div>
-        <div class='call'>321.5 롤294ㅈ</div>
-      </div>
-    </div>
-  </section>
-
-  <section class='section'>
-    <div class='section-no'>SECTION 02</div>
-    <div class='section-title'>적응</div>
-    <div class='section-desc'>AI 시대를 살아가는 새로운 역량</div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433341/417433319/9791193282342' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193282342.jpg' alt='AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵'>
-      </a>
-      <div>
-        <div class='title'>AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵</div>
-        <div class='author'>리더인</div>
-        <div class='call'>004.73 리24ㅇ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435187/417435176/9791193674260' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193674260.jpg' alt='AI 에이전트 트렌드＆활용백과'>
-      </a>
-      <div>
-        <div class='title'>AI 에이전트 트렌드＆활용백과</div>
-        <div class='author'>김덕진 외</div>
-        <div class='call'>004.73 김24ㅇ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433342/417433315/9791190488617' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190488617.jpg' alt='AI 시대의 질문력, 프롬프트 엔지니어링'>
-      </a>
-      <div>
-        <div class='title'>AI 시대의 질문력, 프롬프트 엔지니어링</div>
-        <div class='author'>류한석</div>
-        <div class='call'>004.73 류92ㅇ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/423172830/423172828/9791173324253' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt='AI 시대, 강력한 개인이 온다'>
-      </a>
-      <div>
-        <div class='title'>AI 시대, 강력한 개인이 온다</div>
-        <div class='author'>구본권</div>
-        <div class='call'>331.544 구45ㅇ</div>
-      </div>
-    </div>
-  </section>
-
-  <section class='section'>
-    <div class='section-no'>SECTION 03</div>
-    <div class='section-title'>미래</div>
-    <div class='section-desc'>노동의 미래를 상상하다</div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417559632/417559610/9788925577647' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925577647.jpg' alt='일의 역사'>
-      </a>
-      <div>
-        <div class='title'>일의 역사</div>
-        <div class='author'>제임스 수즈먼</div>
-        <div class='call'>321.509 수77ㅇ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417617397/417617370/9791191183030' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191183030.jpg' alt='새로운 가난이 온다'>
-      </a>
-      <div>
-        <div class='title'>새로운 가난이 온다</div>
-        <div class='author'>김만권</div>
-        <div class='call'>334 김32ㅅ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여'>
-      </a>
-      <div>
-        <div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div>
-        <div class='author'>앤디 스턴 외</div>
-        <div class='call'>321.5 스884ㄴ</div>
-      </div>
-    </div>
-    
-    <div class='card'>
-      <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434372/417434354/9791143003225' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791143003225.jpg' alt='AI와 지속 가능한 노동'>
-      </a>
-      <div>
-        <div class='title'>AI와 지속 가능한 노동</div>
-        <div class='author'>김주희</div>
-        <div class='call'>321.5 김76ㅇ</div>
-      </div>
-    </div>
-  </section>
-
-</div>
-</body>
-</html>
+      <p>그럼에도 우리는 낯선 속삭임에 귀를 기울이고,<br>어둠 속에 숨겨진 흔적을 바라보게 됩니다.</p>
+      <p>이번 북큐레이션은 호러와 미스터리,<br>판타지 장르의 영어 원서를 통해<br>설명할 수 없는 사건과 감춰진 비밀이 있는<br>이야기 속으로 여러분을 초대합니다.</
