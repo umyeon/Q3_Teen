@@ -4,101 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우면도서관 북큐레이션 | 청소년실</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* [색상 및 폰트 중심의 기본 스타일] */
-        body {
-            font-family: 'Noto Serif KR', serif; /* 전체 폰트를 차분한 명조체로 변경 */
-            background-color: #000000;          /* 포스터 바탕과 동일한 순수 블랙 */
-            color: #ffffff;                     /* 기본 텍스트 색상은 화이트 */
-            line-height: 1.8;
+        /* 기본 스타일 셋팅 */
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* 메인 컨테이너 (기본 블록 레이아웃) */
-        .container {
-            max-width: 600px; /* 기본 웹페이지 표준 너비 */
+        body {
+            background-color: #000000; /* 배경색을 순수 검정색으로 변경 */
+            color: #ffffff;            /* 기본 폰트 색상을 하얀색으로 변경 */
+            font-family: 'Noto Serif KR', serif; /* 명조체 유지 */
+            line-height: 1.8;
+            letter-spacing: -0.03em;
+            overflow-x: hidden;
+        }
+
+        /* 깃허브 페이지용 메인 컨테이너 */
+        .wrapper {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 40px 20px;
         }
 
-        /* 상단 소속 안내 스타일 */
-        .header-tag {
+        /* 상단 소속 표시 (우면도서관 북큐레이션 | 청소년실) */
+        .sub-header {
             text-align: right;
-            font-size: 14px;
-            color: #888888;
-            margin-bottom: 40px;
+            font-size: 0.85rem;
+            color: #888;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+            margin-bottom: 50px;
+            font-family: sans-serif;
         }
 
-        /* 이미지 정렬 (기본 틀 유지) */
-        .image-wrapper {
+        /* --- [섹션 1] 메인 비주얼 포스터 영역 --- */
+        .poster-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .poster-image-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid #1a2f23; /* 포스터의 그린 톤을 반영한 미세한 테두리 */
             margin-bottom: 30px;
         }
-        .image-wrapper img {
-            max-width: 100%;
-            height: auto;
+
+        .poster-image-box img {
+            width: 100%;
+            display: block;
         }
 
-        /* 텍스트 영역 스타일 */
-        .content-area {
-            margin-top: 40px;
-            padding: 0 10px;
-        }
-
-        /* 타이틀 스타일 */
-        .title {
-            font-size: 24px;
+        /* 포스터 메인 카피 타이포그래피 구현 */
+        .main-title-english {
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 30px;
-            border-left: 3px solid #ffffff; /* 소개글 이미지의 세로선 느낌을 포인트로 차용 */
-            padding-left: 15px;
+            color: #ffffff; /* 하얀색 설정 */
+            text-shadow: 0 0 15px rgba(255,255,255,0.2);
+            margin-top: 10px;
+            white-space: nowrap; /* 아무리 텍스트가 커져도 줄바꿈되지 않도록 설정 */
         }
 
-        /* 본문 텍스트 스타일 */
-        .description-text {
-            font-size: 16px;
-            color: #dddddd; /* 가독성을 위한 약간 밝은 그레이 */
+        /* --- [섹션 2] 소개글 컨텐츠 영역 (톤앤매너 완벽 재현) --- */
+        .intro-section {
+            display: flex;
+            margin-top: 60px;
+            border-top: 1px solid #1a2f23;
+            padding-top: 60px;
+            gap: 40px;
         }
 
-        .description-text p {
-            margin-bottom: 30px;
-        }
-
-        /* 특정 단어 강조 (포스터의 하단 그린 컬러 톤 적용) */
-        .highlight {
-            color: #9cb3a8; 
+        /* 왼쪽 버티컬 타이틀 (어둠 속의 목격자들) */
+        .vertical-title {
+            font-size: 1.8rem;
             font-weight: 700;
+            color: #ffffff; /* 하얀색 설정 */
+            writing-mode: vertical-rl; /* 세로쓰기 구현 */
+            text-orientation: upright;
+            letter-spacing: 0.2em;
+            line-height: 1.2;
+            border-right: 2px solid #ffffff;
+            padding-right: 20px;
+            height: fit-content;
+        }
+
+        /* 오른쪽 소개 본문 */
+        .intro-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            font-size: 1.1rem;
+            color: #ffffff; /* 소개글 본문 색상 하얀색으로 변경 */
+            font-weight: 300;
+        }
+
+        /* 강조 문구 (어떤 문구는 서늘하고 강렬하게) */
+        .intro-body p strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .intro-highlight {
+            color: #ffffff; /* 하얀색 설정 */
+            font-weight: 500;
+        }
+
+        /* 모바일 반응형 대응 */
+        @media (max-width: 600px) {
+            .intro-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .vertical-title {
+                writing-mode: horizontal-tb;
+                border-right: none;
+                border-bottom: 2px solid #ffffff;
+                padding-right: 0;
+                padding-bottom: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .main-title-english {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-tag">우면도서관 북큐레이션 | 청소년실</div>
-
-        <div class="image-wrapper">
-            <img src="청소년 메인 1.png" alt="Where Secrets Grow">
+    <div class="wrapper">
+        <div class="sub-header">
+            우면도서관 북큐레이션 | 청소년실
         </div>
 
-        <div class="content-area">
-            <h2 class="title">어둠 속의 목격자들</h2>
+        <section class="poster-section">
+            <div class="poster-image-box">
+                <img src="청소년 메인 1.png" alt="Where Secrets Grow 포스터">
+            </div>
+            <h1 class="main-title-english">Where Secrets Grow</h1>
+        </section>
+
+        <section class="intro-section">
+            <div class="vertical-title">
+                어둠 속의 목격자들
+            </div>
             
-            <div class="description-text">
+            <div class="intro-body">
                 <p>
                     어떤 문은 열지 않는 편이 좋습니다.<br><br>
                     어떤 이름은 부르지 않는 편이 좋고,<br>
                     어떤 비밀은 끝까지 모르는 편이 좋습니다.
                 </p>
-
+                
                 <p>
                     그럼에도 우리는<br>
                     낯선 속삭임에 귀를 기울이고,<br>
-                    <span class="highlight">어둠 속에 숨겨진 흔적</span>을 바라보게 됩니다.
+                    <span class="intro-highlight">어둠 속에 숨겨진 흔적</span>을 바라보게 됩니다.
                 </p>
-
+                
                 <p>
                     이번 북큐레이션은<br>
                     <strong>호러와 미스터리 장르의 영어원서</strong>를 통해<br>
@@ -106,7 +180,7 @@
                     이야기 속으로 여러분을 초대합니다.
                 </p>
             </div>
-        </div>
+        </section>
     </div>
 
 </body>
