@@ -3,197 +3,165 @@
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Where Secrets Grow</title>
-
+<title>어둠 속의 목격자들</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-
 <style>
-body{
-    margin:0;
-    background:#000;
-    color:#fff;
-    font-family:'Pretendard',sans-serif;
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#050507;color:#f0ede8;font-family:'Pretendard',sans-serif}
 
-.wrap{
-    max-width:760px;
-    margin:auto;
-    padding:24px 16px 80px;
-}
-
-.hero{
+  .hero{
     position:relative;
-}
-
-.hero:before{
-    display:none;
-}
-
-.eyebrow-wrapper{
+    min-height:100svh;
     display:flex;
-    justify-content:flex-end;
-}
-
-.eyebrow{
-    display:inline-flex;
-    padding:8px 14px;
-    border-radius:999px;
-    background:#fff;
-    color:#000;
-    font-size:11px;
-    font-weight:600;
-}
-
-.hero-title{
-    font-size:22px;
-    font-weight:400;
-    letter-spacing:.25em;
-    text-transform:uppercase;
-    color:#bdbdbd;
-    margin:40px 0 12px;
-    white-space:nowrap;
-}
-
-.hero-question{
-    font-size:clamp(42px,8vw,72px);
-    font-weight:800;
-    line-height:1;
-    margin:0 0 48px;
-    text-align:left;
-    white-space:nowrap;
-    letter-spacing:-0.05em;
-    color:#fff;
-}
-
-.hero-text{
-    line-height:2;
-    color:#d0d0d0;
-    text-align:left;
-    max-width:560px;
-}
-
-.notice{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:40px 0 12px;
-    padding:14px 16px;
-    background:#111;
-    border:1px solid #333;
-    border-radius:14px;
-    font-size:13px;
-    color:#d0d0d0;
-    letter-spacing:-0.03em;
-    white-space:nowrap;
-    text-overflow:ellipsis;
+    flex-direction:column;
     overflow:hidden;
-}
+  }
+  .hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background:#050507;
+    z-index:0;
+  }
+  .hero::after{
+    content:'';
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 40% at 52% 105%,  rgba(60,180,80,.28) 0%,  transparent 65%),
+      radial-gradient(ellipse 40% 25% at 52% 108%,  rgba(90,210,90,.18) 0%,  transparent 55%),
+      radial-gradient(ellipse 90% 50% at 50% 100%,  rgba(30,90,40,.22)  0%,  transparent 70%);
+    z-index:0;
+  }
+  .hero-dark{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 0%, rgba(5,5,7,0) 0%, rgba(5,5,7,.5) 60%, rgba(5,5,7,.95) 100%);
+    z-index:1;
+  }
+  .hero-glow{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 35% 50% at 88% 62%, rgba(110,40,160,.2) 0%, transparent 70%),
+      radial-gradient(ellipse 25% 30% at 12% 55%, rgba(40,80,30,.15)  0%, transparent 65%);
+    z-index:1;
+  }
+  .hero-top{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 80% 30% at 50% -5%, rgba(200,210,200,.04) 0%, transparent 70%);
+    z-index:1;
+  }
 
-.section{
-    margin-top:72px;
-}
+  .eyebrow-wrap{
+    position:relative;z-index:10;
+    display:flex;justify-content:flex-end;
+    padding:20px 20px 0;
+  }
+  .eyebrow{
+    display:inline-flex;
+    padding:7px 14px;
+    border-radius:999px;
+    background:#f0ede8;
+    color:#0a0a0a;
+    font-size:11px;
+    letter-spacing:.03em;
+    font-weight:500;
+  }
 
-.section-no{
-    font-size:12px;
-    color:#888;
-    letter-spacing:.18em;
-}
-
-.section-title{
-    font-size:34px;
-    font-weight:700;
-    color:#fff;
-}
-
-.section-desc{
-    color:#aaa;
-}
-
-.card{
+  .hero-body{
+    position:relative;z-index:10;
+    flex:1;
     display:flex;
-    gap:14px;
-    align-items:center;
-    background:#fafaf8;
-    border:1px solid #ddd;
-    border-radius:18px;
-    padding:14px;
-    margin:12px 0;
-}
-
-.cover{
-    width:72px;
-    height:102px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-.title{
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:0 24px 52px;
+  }
+  .eng-caption{
+    font-size:12px;
+    letter-spacing:.25em;
+    color:#8a9e8a;
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .hero-title{
+    font-family:'Batang','바탕','Georgia','Times New Roman',serif;
+    font-size:clamp(44px,12vw,96px);
     font-weight:700;
-    margin-bottom:6px;
-    line-height:1.35;
-    color:#202020;
-}
+    line-height:1.05;
+    letter-spacing:-.02em;
+    color:#ffffff;
+    white-space:nowrap;
+    margin-bottom:32px;
+  }
+  .hero-title .sub{
+    font-family:'Pretendard',sans-serif;
+    font-size:clamp(14px,3.5vw,22px);
+    font-weight:300;
+    letter-spacing:.06em;
+    color:rgba(255,255,255,.55);
+    display:block;
+    margin-top:14px;
+    white-space:normal;
+  }
+  .hero-desc{
+    max-width:460px;
+    font-size:15px;
+    line-height:1.9;
+    color:rgba(255,255,255,.55);
+  }
+  .hero-desc p+p{margin-top:.85em}
 
-.author{
-    font-size:14px;
-    color:#6b6b6b;
-    margin-bottom:4px;
-}
+  hr.divider{border:none;border-top:1px solid rgba(255,255,255,.1);margin:0 20px}
+  .notice{display:flex;align-items:center;gap:10px;margin:28px 20px;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;font-size:13px;color:rgba(255,255,255,.45);letter-spacing:-.02em}
 
-.call{
-    font-size:14px;
-    color:#6b6b6b;
-}
+  .wrap{max-width:760px;margin:auto;padding:0 16px 80px}
+  .section{margin-top:64px}
+  .section-no{font-size:11px;color:#6b6560;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+  .section-title{font-size:32px;font-weight:800;color:#f0ede8;margin-bottom:4px}
+  .section-desc{font-size:14px;color:#7a7570;margin-bottom:20px}
+
+  .card{display:flex;gap:16px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:16px;margin:10px 0;transition:background .2s}
+  .card:hover{background:rgba(255,255,255,.08)}
+  .cover{width:72px;height:102px;object-fit:cover;border-radius:10px;flex-shrink:0}
+  .title{font-weight:700;margin-bottom:6px;line-height:1.35;color:#f0ede8}
+  .author{font-size:14px;color:#8a8480;margin-bottom:4px}
+  .call{font-size:13px;color:#6b6560}
 </style>
 </head>
-
 <body>
 
-<main class='wrap'>
-
 <section class='hero'>
-
-<div class='eyebrow-wrapper'>
-    <div class='eyebrow'>
-        우면도서관 북큐레이션 ｜ 청소년실
+  <div class='hero-dark'></div>
+  <div class='hero-glow'></div>
+  <div class='hero-top'></div>
+  <div class='eyebrow-wrap'>
+    <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
+  </div>
+  <div class='hero-body'>
+    <p class='eng-caption'>Where Secrets Grow</p>
+    <h1 class='hero-title'>
+      어둠 속의 목격자들
+      <span class='sub'>모든 비밀은 누군가의 발견을 기다린다</span>
+    </h1>
+    <div class='hero-desc'>
+      <p>어떤 문은 열지 않는 편이 좋습니다.</p>
+      <p>어떤 이름은 부르지 않는 편이 좋고,<br>어떤 비밀은 끝까지 모르는 편이 좋습니다.</p>
+      <p>그럼에도 우리는<br>낯선 속삭임에 귀를 기울이고,<br>어둠 속에 숨겨진 흔적을 바라보게 됩니다.</p>
+      <p>이번 북큐레이션은<br>호러와 미스터리 장르의 영어원서를 통해<br>설명할 수 없는 사건과 감춰진 비밀이 있는<br>이야기 속으로 여러분을 초대합니다.</p>
     </div>
-</div>
+  </div>
+</section>
 
-<h1 class='hero-title'>
-    Where Secrets Grow
-</h1>
+<hr class='divider'>
+<div class='notice'>📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
 
-<p class='hero-question'>
-    어둠 속의 목격자들
-</p>
+<div class='wrap'>
 
-<div class='hero-text'>
+<section class='section'><div class='section-no'>SECTION 01</div><div class='section-title'>변화</div><div class='section-desc'>AI는 우리의 일을 어떻게 바꾸는가</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9788936481247' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936481247.jpg' alt='AI가 나보다 일을 잘할 때'></a><div><div class='title'>AI가 나보다 일을 잘할 때</div><div class='author'>김대식 외</div><div class='call'>321.52 김23ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435259/417435257/9788962626605' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788962626605.jpg' alt='먼저 온 미래'></a><div><div class='title'>먼저 온 미래</div><div class='author'>장강명</div><div class='call'>331.54 장12ㅁ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435075/417435055/9791192488776' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192488776.jpg' alt='휴머노이드 : 인간을 닮은 기계, 공존의 시작'></a><div><div class='title'>휴머노이드 : 인간을 닮은 기계, 공존의 시작</div><div class='author'>김상균</div><div class='call'>559.962 김52ㅎ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434303/417434293/9791191311686' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191311686.jpg' alt='진격하는 AI와 흔들리는 노동자'></a><div><div class='title'>진격하는 AI와 흔들리는 노동자</div><div class='author'>이재열 외</div><div class='call'>321.5 롤294ㅈ</div></div></div></section>
 
-<p>어떤 문은 열지 않는 편이 좋습니다.</p>
+<section class='section'><div class='section-no'>SECTION 02</div><div class='section-title'>적응</div><div class='section-desc'>AI 시대를 살아가는 새로운 역량</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433341/417433319/9791193282342' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193282342.jpg' alt='AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵'></a><div><div class='title'>AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵</div><div class='author'>리더인</div><div class='call'>004.73 리24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435187/417435176/9791193674260' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193674260.jpg' alt='AI 에이전트 트렌드＆활용백과'></a><div><div class='title'>AI 에이전트 트렌드＆활용백과</div><div class='author'>김덕진 외</div><div class='call'>004.73 김24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433342/417433315/9791190488617' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190488617.jpg' alt='AI 시대의 질문력, 프롬프트 엔지니어링'></a><div><div class='title'>AI 시대의 질문력, 프롬프트 엔지니어링</div><div class='author'>류한석</div><div class='call'>004.73 류92ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/423172830/423172828/9791173324253' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt='AI 시대, 강력한 개인이 온다'></a><div><div class='title'>AI 시대, 강력한 개인이 온다</div><div class='author'>구본권</div><div class='call'>331.544 구45ㅇ</div></div></div></section>
 
-<p>
-어떤 이름은 부르지 않는 편이 좋고,<br>
-어떤 비밀은 끝까지 모르는 편이 좋습니다.
-</p>
-
-<p>
-그럼에도 우리는<br>
-낯선 속삭임에 귀를 기울이고,<br>
-어둠 속에 숨겨진 흔적을 바라보게 됩니다.
-</p>
-
-<p>
-이번 북큐레이션은<br>
-호러와 미스터리 장르의 영어원서를 통해<br>
-설명할 수 없는 사건과 감춰진 비밀이 있는<br>
-이야기 속으로 여러분을 초대합니다.
-</p>
+<section class='section'><div class='section-no'>SECTION 03</div><div class='section-title'>미래</div><div class='section-desc'>노동의 미래를 상상하다</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417559632/417559610/9788925577647' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925577647.jpg' alt='일의 역사'></a><div><div class='title'>일의 역사</div><div class='author'>제임스 수즈먼</div><div class='call'>321.509 수77ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417617397/417617370/9791191183030' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191183030.jpg' alt='새로운 가난이 온다'></a><div><div class='title'>새로운 가난이 온다</div><div class='author'>김만권</div><div class='call'>334 김32ㅅ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여'></a><div><div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div><div class='author'>앤디 스턴 외</div><div class='call'>321.5 스884ㄴ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434372/417434354/9791143003225' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791143003225.jpg' alt='AI와 지속 가능한 노동'></a><div><div class='title'>AI와 지속 가능한 노동</div><div class='author'>김주희</div><div class='call'>321.5 김76ㅇ</div></div></div></section>
 
 </div>
-
-<!-- 아래 SECTION 01~03 및 카드 영역은 기존 코드 그대로 유지 -->
-
-</main>
-
 </body>
 </html>
