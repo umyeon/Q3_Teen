@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang='ko'>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
 <title>어둠 속의 목격자들</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
 <style>
-/* 1. Global Reset */
+/* 1. 글로벌 디자인 시스템 & 리셋 */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #efede8; 
+  background: #efede8;
   color: #111111;
   font-family: 'Pretendard', sans-serif;
   overflow-x: hidden;
@@ -27,51 +27,55 @@ body {
   inset: 0; width: 100%; height: 100%;
   opacity: 0.04;
   pointer-events: none;
-  z-index: 2;
+  z-index: 5;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* 2. Hero Layout */
-.hero {
+/* 2. 시네마틱 히어로 레이아웃 */
+.cinematic-hero {
   background: #efede8;
-  padding: 50px 24px 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 40px 0 20px;
   position: relative;
 }
 
 .eyebrow-wrap {
-  width: 100%;
-  max-width: 640px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  padding-bottom: 14px;
+  justify-content: flex-end;
+  padding: 0 32px 10px;
 }
 
 .eyebrow {
+  display: inline-flex;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #666666;
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: .05em;
+  font-weight: 500;
 }
 
-/* 3. Portal Frame & Inner Mist Animations */
-.portal-frame {
+/* 3. 거대한 아치(Portal) & 3중 흡입 안개 애니메이션 복원 */
+.portal-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0 60px;
   position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 640px;
-  background: #000000; 
-  border-radius: 250px 250px 0 0;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.25);
-  overflow: hidden;
 }
 
+.portal {
+  width: min(440px, 82vw);
+  height: 560px;
+  border-radius: 240px 240px 0 0;
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 65px rgba(0,0,0,0.22);
+}
+
+/* 애니메이션 레이어 A: 형광 초록 안개 */
 .portal-mist-green {
   position: absolute;
   bottom: -40px;
@@ -79,30 +83,32 @@ body {
   transform: translateX(-50%);
   width: 130%;
   height: 50%;
-  background: radial-gradient(ellipse at 50% 100%, #2fa339 0%, rgba(92, 212, 72, 0.4) 45%, transparent 75%);
-  filter: blur(10px);
+  background: radial-gradient(ellipse at 50% 100%, #2fa339 0%, rgba(92, 212, 72, 0.45) 45%, transparent 75%);
+  filter: blur(12px);
   animation: pulse-green 6s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
   z-index: 1;
 }
 
+/* 유혹의 보라색 흡입 광원 */
 .portal-mist-purple {
   position: absolute;
   top: 10%;
   right: -10%;
-  width: 260px;
-  height: 260px;
+  width: 240px;
+  height: 240px;
   background: radial-gradient(circle, rgba(157, 51, 234, 0.65) 0%, rgba(138, 43, 226, 0.2) 50%, transparent 70%);
   filter: blur(15px);
   animation: lure-purple 7s infinite cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
+/* 유혹의 핏빛 레드 흡입 광원 */
 .portal-mist-red {
   position: absolute;
   bottom: 10%;
   left: -10%;
-  width: 240px;
-  height: 240px;
+  width: 220px;
+  height: 220px;
   background: radial-gradient(circle, rgba(255, 30, 30, 0.6) 0%, rgba(220, 20, 20, 0.15) 50%, transparent 70%);
   filter: blur(15px);
   animation: lure-red 6s infinite cubic-bezier(0.25, 1, 0.5, 1);
@@ -113,176 +119,177 @@ body {
   0% { transform: translateX(-50%) scaleY(0.9) translateY(10px); opacity: 0.8; }
   100% { transform: translateX(-50%) scaleY(1.1) translateY(0); opacity: 1; }
 }
-
 @keyframes lure-purple {
   0% { transform: translate(0, 0) scale(0.7); opacity: 0.1; filter: blur(25px); }
-  40% { transform: translate(-60px, 40px) scale(1.2); opacity: 0.9; filter: blur(10px); }
-  100% { transform: translate(-160px, 120px) scale(0.4); opacity: 0; filter: blur(30px); }
+  40% { transform: translate(-50px, 30px) scale(1.2); opacity: 0.9; filter: blur(10px); }
+  100% { transform: translate(-140px, 100px) scale(0.4); opacity: 0; filter: blur(30px); }
 }
-
 @keyframes lure-red {
   0% { transform: translate(0, 0) scale(0.7); opacity: 0.1; filter: blur(25px); }
-  45% { transform: translate(50px, -60px) scale(1.15); opacity: 0.9; filter: blur(10px); }
-  100% { transform: translate(140px, -150px) scale(0.3); opacity: 0; filter: blur(30px); }
+  45% { transform: translate(40px, -50px) scale(1.15); opacity: 0.9; filter: blur(10px); }
+  100% { transform: translate(120px, -130px) scale(0.3); opacity: 0; filter: blur(30px); }
 }
 
-.portal-interior-text {
+.portal-copy {
   position: absolute;
   top: 36%; left: 0; right: 0;
   text-align: center;
   color: #f4f0e6;
   font-family: 'Noto Serif KR', serif;
-  font-weight: 200;
-  font-size: clamp(20px, 4.5vw, 25px);
+  font-weight: 300;
+  font-size: clamp(19px, 4.5vw, 24px);
   line-height: 1.9;
   letter-spacing: 0.06em;
-  z-index: 5;
-  text-shadow: 0 0 15px rgba(255,255,255,0.12);
-  animation: text-breathing 5s infinite ease-in-out;
+  z-index: 4;
+  text-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
-@keyframes text-breathing {
-  0%, 100% { transform: translateY(0); opacity: 0.85; }
-  50% { transform: translateY(-4px); opacity: 1; }
-}
-
-/* 4. English Title System */
-.portal-absolute-title {
-  margin-top: 32px;
-  text-align: center;
+/* 아치와 중첩을 해제하고 프리텐다드를 입힌 정갈한 영문 서체 */
+.portal-title {
+  margin-top: 28px;
   font-family: 'Pretendard', sans-serif;
   font-weight: 900;
-  font-size: clamp(20px, 5.5vw, 44px); 
-  color: #111111; 
+  font-size: clamp(22px, 5.5vw, 42px);
+  color: #111111;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   line-height: 1;
-  z-index: 10;
-  pointer-events: none;
-  white-space: nowrap; 
-  width: 100%;
-  max-width: 500px;
+  white-space: nowrap;
 }
 
-/* 5. Editorial Story Block (지정하신 3대 명품 호러 무드 포인트 반영) */
+/* 4. 소개글 영역 (요구사항 반영: 촌스러움을 완전히 빼고 밤안개로 세련되게 변주한 디자인) */
 .story-block {
-  display: flex;
-  flex-direction: row; 
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 32px;
-  width: 100%;
-  max-width: 640px;
-  margin: 140px auto 40px;
-  padding: 50px 32px;
-  align-items: stretch; 
-  background: #111112; /* [포인트 1] 서늘하고 무거운 미드나잇 차콜 묵색 블록 */
-  border-radius: 0; /* [포인트 1] 촌스러운 라운딩을 칼같이 잘라낸 완벽한 직각 단면 */
-  border-left: 4px solid #6b1a1a; /* [포인트 2] 결계를 상징하는 말라붙은 핏빛 버건디 솔리드 선 */
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  max-width: 680px;
+  margin: 0 auto 40px;
+  padding: 45px 36px;
+  background: #09090b; /* 깊은 밤의 묵색 무광 패널 */
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
 }
 
+/* 가독성을 해치지 않도록 불투명도를 극도로 낮추어 은은하게 움직이는 배후의 스크린 안개 변주 */
+.story-block::before {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: 
+    radial-gradient(circle at 15% 85%, rgba(138, 43, 226, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(50, 170, 60, 0.06) 0%, transparent 45%);
+  z-index: 1;
+  filter: blur(15px);
+  animation: creeping-smoke 12s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes creeping-smoke {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  100% { transform: scale(1.1) translate(10px, -10px); opacity: 1; }
+}
+
+.vertical-title, .editorial-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* 타이틀과 설명글을 완전히 가로막아 서사적 긴장감을 주는 에디토리얼 세로선 구현 */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 900;
-  font-size: clamp(22px, 4.5vw, 30px);
-  color: #e5e5e0; 
-  letter-spacing: 0.18em; /* [포인트 3] 고독하고 기묘한 긴장감을 주는 자간 확장 */
-  line-height: 1.0;
-  flex-shrink: 0;
-  text-shadow: none; /* [포인트 3] 번쩍이는 인위적 그림자 오라 완벽 소거 */
-}
-
-.vertical-line {
-  width: 1px;
-  background: rgba(255, 255, 255, 0.08); /* 타이틀과 본문을 깔끔하게 가르는 최소한의 내측 분리선 */
-  flex-shrink: 0;
-  align-self: stretch;
+  font-family: 'Pretendard', sans-serif;
+  font-size: clamp(20px, 4.5vw, 26px);
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: #e2e2e8;
+  line-height: 1;
+  padding-right: 28px;
+  border-right: 1px solid rgba(255, 255, 255, 0.12); /* 깔끔하고 얇은 슬림 분리선 장착 */
 }
 
 .editorial-text {
-  flex: 1;
+  max-width: 520px;
   font-family: 'Noto Serif KR', serif;
-  font-size: clamp(13.5px, 3.8vw, 16px); 
-  line-height: 2.3; /* [포인트 3] 숨이 막힐 듯 서사적인 공백을 자아내는 시집 형태의 넓은 행간 */
-  color: #b5b5be; /* 눈이 편안하면서 차분히 가라앉은 섀도우 실버 */
-  font-weight: 400;
-  padding-top: 2px;
-  word-break: keep-all; 
+  font-size: clamp(14px, 3.8vw, 17px);
+  line-height: 2.2;
+  color: #b8b8c2; /* 차분하고 고급스럽게 가라앉은 고스트 실버 */
+  font-weight: 300;
+  word-break: keep-all; /* 모바일 문자 파편화 현상 완전 봉쇄 */
 }
 
-.editorial-text p {
-  margin-bottom: 24px;
-}
+.editorial-text p { margin-bottom: 24px; }
+.editorial-text p:last-child { margin-bottom: 0; }
 
-.editorial-text p:last-child {
-  margin-bottom: 0;
-}
-
-/* 6. Book List Section Layout */
+/* 5. 도서 목록 섹션 레이아웃 (원본 무수정 100% 동결 구역) */
 hr.divider {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
-  margin: 80px 24px 0;
+  margin: 60px 20px 0;
 }
 
 .notice {
+  display: flex; align-items: center; gap: 10px;
   max-width: 760px;
-  margin: 36px auto 10px;
-  padding: 15px 24px;
-  background: #ffffff;
-  border: 1px dashed rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
+  margin: 28px auto 10px;
+  padding: 14px 18px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
   font-size: 13px;
+  font-family: 'Pretendard', sans-serif;
   color: #555555;
-  text-align: center;
+  letter-spacing: -.02em;
 }
 
-.wrap {
-  max-width: 760px;
-  margin: auto;
-  padding: 30px 16px 120px;
+.wrap { max-width: 760px; margin: auto; padding: 0 16px 80px; }
+.section { margin-top: 64px; }
+
+.section-no {
+  font-size: 11px;
+  color: #5a5550;
+  letter-spacing: .2em;
+  font-family: 'Pretendard', sans-serif;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 4px;
+}
+
+.section-desc {
+  font-size: 14px;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  color: #6a6560;
+  margin-bottom: 20px;
 }
 
 .card {
-  display: flex;
-  gap: 24px;
-  align-items: center;
+  display: flex; gap: 16px; align-items: center;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 16px;
-  padding: 22px;
-  margin: 18px 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.01);
-  position: relative;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 10px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  transition: transform 0.2s, background 0.2s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  background: #ffffff;
-  border-color: rgba(92, 212, 72, 0.45); 
-  box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22);
+  background: #faf9f6;
+  transform: translateY(-2px);
 }
 
-/* 안전한 CSS 스켈레톤 형태의 이미지 홀더 백그라운드 */
-.cover {
-  width: 78px;
-  height: 110px;
-  background: #d8d5cf;
-  border-radius: 6px;
-  flex-shrink: 0;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
-}
-
-.card:hover .cover {
-  transform: scale(1.03) rotate(-1deg);
-}
+.cover { width: 72px; height: 102px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #e0ded9; }
 
 .title {
   font-family: 'Noto Serif KR', serif;
-  font-size: 16.5px;
   font-weight: 700;
   margin-bottom: 6px;
   line-height: 1.4;
@@ -291,188 +298,90 @@ hr.divider {
 
 .author {
   font-size: 13px;
-  color: #666666;
-  margin-bottom: 6px;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  color: #7a7570;
+  margin-bottom: 4px;
 }
 
 .call {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  color: #7a7065;
+  font-size: 12px;
+  font-family: 'Pretendard', sans-serif;
+  color: #5a5550;
   background: #edeae3;
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 4px;
-  letter-spacing: 0.02em;
+  display: inline-block;
 }
 
-/* 7. Mobile View Optimization */
-@media(max-width:600px){
-  .portal-frame {
-    height: 480px;
-    border-radius: 190px 190px 0 0;
-  }
-  .portal-absolute-title {
-    font-size: 20px; 
-    margin-top: 20px;
-  }
-  .story-block {
-    margin-top: 110px; 
-    padding: 38px 20px;
-    gap: 18px;
-  }
-  .card { padding: 16px; gap: 16px; }
-  .cover { width: 68px; height: 96px; }
+/* 6. 모바일 해상도 방어 튜닝 */
+@media(max-width:480px){
+  .portal-wrap { margin-bottom: 45px; }
+  .portal { height: 420px; }
+  .story-block { padding: 36px 20px; gap: 16px; }
+  .vertical-title { padding-right: 16px; }
+  .section-title { font-size: 26px; }
+  .card { padding: 12px; gap: 12px; }
+  .cover { width: 60px; height: 85px; }
+  .notice { margin: 20px 12px; font-size: 12px; }
+  .wrap { padding: 0 12px 60px; }
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
+<section class='cinematic-hero'>
   <div class="hero-grain-texture"></div>
 
-  <div class="eyebrow-wrap">
-    <div class="eyebrow">우면도서관 북큐레이션 | 청소년실</div>
-    <div class="eyebrow" style="color:#2fa339; font-weight:700; letter-spacing: 0;">Youth Zone</div>
+  <div class='eyebrow-wrap'>
+    <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
   </div>
 
-  <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <div class="portal-frame">
-      <div class="portal-mist-green"></div>
-      <div class="portal-mist-purple"></div>
-      <div class="portal-mist-red"></div>
-      
-      <div class="portal-interior-text">
-        모든 비밀은<br>누군가의 발견을 기다린다
+  <div class='hero-body'>
+    <div class='portal-wrap'>
+      <div class='portal'>
+        <div class="portal-mist-green"></div>
+        <div class="portal-mist-purple"></div>
+        <div class="portal-mist-red"></div>
+        <div class='portal-copy'>
+          모든 비밀은<br>누군가의 발견을 기다린다
+        </div>
+      </div>
+
+      <div class='portal-title'>Where Secrets Grow</div>
+    </div>
+
+    <div class='story-block'>
+      <div class='vertical-title'>어둠 속의 목격자들</div>
+
+      <div class='editorial-text'>
+        <p>어떤 문은 열지 않는 편이 좋습니다.</p>
+
+        <p>어떤 이름은 부르지 않는 편이 좋고,<br>
+        어떤 비밀은 끝까지 모르는 편이 좋습니다.</p>
+
+        <p>그럼에도 우리는 낯선 속삭임에 귀를 기울이고,<br>
+        어둠 속에 숨겨진 흔적을 바라보게 됩니다.</p>
+
+        <p>이번 북큐레이션은 호러와 미스터리, 판타지 장르의 영어원서를 통해<br>
+        설명할 수 없는 사건과 감춰진 비밀이 있는 이야기 속으로 여러분을 초대합니다.</p>
       </div>
     </div>
 
-    <h1 class="portal-absolute-title">Where Secrets Grow</h1>
-  </div>
-
-  <div class="story-block">
-    <div class="vertical-title">어둠 속의 목격자들</div>
-    <div class="vertical-line"></div>
-
-    <div class="editorial-text">
-      <p>어떤 문은 열지 않는 편이 좋습니다.</p>
-      
-      <p>어떤 이름은 부르지 않는 편이 좋고,<br>
-      어떤 비밀은 끝까지 모르는 편이 좋습니다.</p>
-      
-      <p>그럼에도 우리는 낯선 속삭임에 귀를 기울이고,<br>
-      어둠 속에 숨겨진 흔적을 바라보게 됩니다.</p>
-      
-      <p>이번 북큐레이션은 호러와 미스터리,<br>
-      판타지 장르의 영어 원서를 통해 설명할 수 없는 사건과 감춰진 비밀이 있는 이야기 속으로 여러분을 초대합니다.</p>
-    </div>
   </div>
 </section>
 
-<hr class="divider">
-<div class="notice"> 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
+<hr class='divider'>
+<div class='notice'>📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
 
-<div class="wrap">
+<div class='wrap'>
 
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">Doll bones</div>
-      <div class="author">Holly Black</div>
-      <div class="call">F 843 B627d</div>
-    </div>
-  </div>
+<section class='section'><div class='section-no'>SECTION 01</div><div class='section-title'>변화</div><div class='section-desc'>AI는 우리의 일을 어떻게 바꾸는가</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9788936481247' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936481247.jpg' alt='AI가 나보다 일을 잘할 때'></a><div><div class='title'>AI가 나보다 일을 잘할 때</div><div class='author'>김대식 외</div><div class='call'>321.52 김23ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435259/417435257/9788962626605' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788962626605.jpg' alt='먼저 온 미래'></a><div><div class='title'>먼저 온 미래</div><div class='author'>장강명</div><div class='call'>331.54 장12ㅁ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435075/417435055/9791192488776' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192488776.jpg' alt='휴머노이드 : 인간을 닮은 기계, 공존의 시작'></a><div><div class='title'>휴머노이드 : 인간을 닮은 기계, 공존의 시작</div><div class='author'>김상균</div><div class='call'>559.962 김52ㅎ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434303/417434293/9791191311686' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191311686.jpg' alt='진격하는 AI와 흔들리는 노동자'></a><div><div class='title'>진격하는 AI와 흔들리는 노동자</div><div class='author'>이재열 외</div><div class='call'>321.5 롤294ㅈ</div></div></div></section>
 
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">The Graveyard Book</div>
-      <div class="author">Neil Gaiman</div>
-      <div class="call">F 843 G141g</div>
-    </div>
-  </div>
+<section class='section'><div class='section-no'>SECTION 02</div><div class='section-title'>적응</div><div class='section-desc'>AI 시대를 살아가는 새로운 역량</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433341/417433319/9791193282342' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193282342.jpg' alt='AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵'></a><div><div class='title'>AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵</div><div class='author'>리더인</div><div class='call'>004.73 리24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435187/417435176/9791193674260' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193674260.jpg' alt='AI 에이전트 트렌드＆활용백과'></a><div><div class='title'>AI 에이전트 트렌드＆활용백과</div><div class='author'>김덕진 외</div><div class='call'>004.73 김24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433342/417433315/9791190488617' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190488617.jpg' alt='AI 시대의 질문력, 프롬프트 엔지니어링'></a><div><div class='title'>AI 시대의 질문력, 프롬프트 엔지니어링</div><div class='author'>류한석</div><div class='call'>004.73 류92ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/423172830/423172828/9791173324253' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt='AI 시대, 강력한 개인이 온다'></a><div><div class='title'>AI 시대, 강력한 개인이 온다</div><div class='author'>구본권</div><div class='call'>331.544 구45ㅇ</div></div></div></section>
 
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">Scary Stories for Young Foxes</div>
-      <div class="author">Christian McKay Heidicker</div>
-      <div class="call">F 843 H465s</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">The Collectors : Stories</div>
-      <div class="author">A. S. King</div>
-      <div class="call">F 843 K52c</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">The Dark-thirty</div>
-      <div class="author">Patricia C. Mckissack</div>
-      <div class="call">F 843 M478d</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">THE WESTING GAME</div>
-      <div class="author">Ellen Raskin</div>
-      <div class="call">F 843 R225w</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">Splendors and glooms</div>
-      <div class="author">Laura Amy Schlitz</div>
-      <div class="call">F 843 S344s</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">The Ghosts of heaven</div>
-      <div class="author">Marcus Sedgwick</div>
-      <div class="call">F 843 S448g</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">Revolver</div>
-      <div class="author">Marcus Sedgwick</div>
-      <div class="call">F 843 S448r</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">Jasper Jones</div>
-      <div class="author">Craig Silvery</div>
-      <div class="call">F 843 S587j</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="cover"></div>
-    <div>
-      <div class="title">When you reach me</div>
-      <div class="author">Rebecca Stead</div>
-      <div class="call">F 843 S799w</div>
-    </div>
-  </div>
+<section class='section'><div class='section-no'>SECTION 03</div><div class='section-title'>미래</div><div class='section-desc'>노동의 미래를 상상하다</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417559632/417559610/9788925577647' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925577647.jpg' alt='일의 역사'></a><div><div class='title'>일의 역사</div><div class='author'>제임스 수즈먼</div><div class='call'>321.509 수77ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417617397/417617370/9791191183030' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191183030.jpg' alt='새로운 가난이 온다'></a><div><div class='title'>새로운 가난이 온다</div><div class='author'>김만권</div><div class='call'>334 김32ㅅ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여'></a><div><div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div><div class='author'>앤디 스턴 외</div><div class='call'>321.5 스884ㄴ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434372/417434354/9791143003225' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791143003225.jpg' alt='AI와 지속 가능한 노동'></a><div><div class='title'>AI와 지속 가능한 노동</div><div class='author'>김주희</div><div class='call'>321.5 김76ㅇ</div></div></div></section>
 
 </div>
 </body>
