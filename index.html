@@ -16,7 +16,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  background:#efede8; /* 단정하고 우아한 현실 세계의 에디토리얼 베이지 */
+  background:#efede8; 
   color:#111111;
   font-family:'Pretendard', sans-serif;
   overflow-x: hidden;
@@ -64,14 +64,14 @@ body{
 }
 
 /* ════════════════════════════════
-   3. 거대한 아치(Portal) & 흡입형 유기적 안개 애니메이션
+   3. 거대한 아치(Portal) & 흡입형 유기적 안개 애니메이션 복원
    ════════════════════════════════ */
 .portal-frame {
   position: relative;
   width: 100%;
   max-width: 500px;
   height: 640px;
-  background: #000000; /* 심연 */
+  background: #000000; 
   border-radius: 250px 250px 0 0;
   box-shadow: 0 40px 90px rgba(0,0,0,0.25);
   overflow: hidden;
@@ -132,7 +132,6 @@ body{
   100% { transform: translate(140px, -150px) scale(0.3); opacity: 0; filter: blur(30px); }
 }
 
-/* 아치 내부 중앙 카피 */
 .portal-interior-text {
   position: absolute;
   top: 36%; left: 0; right: 0;
@@ -154,22 +153,51 @@ body{
 }
 
 /* ════════════════════════════════
-   4. 영문 타이틀 영역
+   4. 영문 타이틀 영역 (문제 1 해결 완료)
    ════════════════════════════════ */
 .portal-absolute-title {
   margin-top: 32px;
   text-align: center;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard', sans-serif; /* 프리텐다드 서체 고정 */
   font-weight: 900;
-  font-size: clamp(16px, 4.5vw, 46px);
+  font-size: clamp(20px, 5.5vw, 44px); /* 아치 가로폭 절대 넘지 않도록 크기 밸런싱 보정 */
   color: #111111; 
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   line-height: 1;
   z-index: 10;
   pointer-events: none;
-  white-space: nowrap;
+  white-space: nowrap; /* 강제 한 줄 유지 */
+  width: 100%;
+  max-width: 500px;
 }
 
 /* ════════════════════════════════
-   5. 에디토리얼 소개글 영역 (요구사항 2 반영: 아치와 통일감을 주는 암흑 패널 및 일렁임
+   5. 에디토리얼 소개글 영역 (문제 2 & 3 해결 완료)
+   ════════════════════════════════ */
+.story-block {
+  display: flex;
+  flex-direction: row; /* 모바일에서도 무조건 좌우 분리 유지 */
+  gap: 28px;
+  width: 100%;
+  max-width: 640px;
+  margin: 130px auto 30px;
+  padding: 40px 24px;
+  align-items: stretch; 
+  background: #020202; 
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  animation: story-abyss-glow 8s infinite alternate ease-in-out;
+}
+
+@keyframes story-abyss-glow {
+  0% { box-shadow: 0 25px 55px rgba(138, 43, 226, 0.12); border-color: rgba(138, 43, 226, 0.2); }
+  100% { box-shadow: 0 25px 55px rgba(255, 30, 30, 0.12); border-color: rgba(255, 30, 30, 0.2); }
+}
+
+/* 문제 2: 세로선의 정확히 왼쪽에 세로 정렬되어 서는 명조형 타이틀 */
+.vertical-title {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: 'Noto Serif KR', serif;
+  font-weight:
