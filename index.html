@@ -21,6 +21,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* 거친 잔혹동화 감성을 자극하는 미세 필름 노이즈 오버레이 */
+.hero-grain-texture {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 /* 2. Hero Layout */
 .hero {
   background: #efede8;
@@ -154,7 +164,7 @@ body {
   max-width: 500px;
 }
 
-/* 5. Editorial Story Block */
+/* 5. Editorial Story Block (매혹과 위험의 Abyss Warning 튜닝) */
 .story-block {
   display: flex;
   flex-direction: row; 
@@ -162,19 +172,42 @@ body {
   width: 100%;
   max-width: 640px;
   margin: 130px auto 30px;
-  padding: 40px 24px;
+  padding: 45px 28px;
   align-items: stretch; 
-  background: #020202; 
+  background: #020202; /* 칠흑의 금기 구역 */
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  animation: story-abyss-glow 8s infinite alternate ease-in-out;
+  position: relative;
+  overflow: hidden; /* 내부 레이어 안개 가두기 */
+  border: 1px solid rgba(255, 30, 30, 0.15); /* 경고의 불길한 핏빛 미세 보더 */
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.45);
 }
 
-@keyframes story-abyss-glow {
-  0% { box-shadow: 0 25px 55px rgba(138, 43, 226, 0.12); border-color: rgba(138, 43, 226, 0.2); }
-  100% { box-shadow: 0 25px 55px rgba(255, 30, 30, 0.12); border-color: rgba(255, 30, 30, 0.2); }
+/* 아름답고 불길한 독기 안개가 텍스트 배후에서 움직이는 효과 */
+.story-block::before {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(255, 30, 30, 0.16) 0%, transparent 55%);
+  z-index: 1;
+  filter: blur(10px);
+  animation: danger-mist-move 7s infinite alternate ease-in-out;
+  pointer-events: none;
 }
 
+@keyframes danger-mist-move {
+  0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 0.8; }
+  100% { transform: scale(1.15) translate(15px, -15px) rotate(5deg); opacity: 1; }
+}
+
+/* 내부 콘텐츠들을 안개 레이어 위로 강제 인상 */
+.vertical-title, .vertical-line, .editorial-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* 세로 타이틀 유혹의 보라빛 오라 추가 */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -185,21 +218,25 @@ body {
   letter-spacing: 0.12em;
   line-height: 1.0;
   flex-shrink: 0;
+  text-shadow: 0 0 12px rgba(138, 43, 226, 0.6); /* 매혹적인 보라색 독기 잔상 */
 }
 
+/* 유혹(보라)에서 위험(핏빛)으로 타들어가는 결계형 네온 세로선 */
 .vertical-line {
   width: 2px;
-  background: rgba(255, 255, 255, 0.2); 
+  background: linear-gradient(to bottom, #9d33ea 0%, #ff1e1e 100%);
+  box-shadow: 0 0 10px rgba(255, 30, 30, 0.6); /* 넘어올 수 없는 선을 뜻하는 강한 발광 */
   flex-shrink: 0;
   align-self: stretch;
 }
 
+/* 서늘한 유령 실버 바이올렛 서체 튜닝 */
 .editorial-text {
   flex: 1;
   font-family: 'Noto Serif KR', serif;
   font-size: clamp(13.5px, 3.8vw, 16.5px); 
   line-height: 2.1;
-  color: #d1cbd4; 
+  color: #e2dde5; /* 안개에 잠겨 가독성을 보존하는 서늘한 애쉬 라벤더 */
   font-weight: 400;
   padding-top: 2px;
   word-break: keep-all; 
@@ -259,7 +296,6 @@ hr.divider {
   box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22);
 }
 
-/* 에러를 완벽하게 차단하도록 수정된 백그라운드 홀더 */
 .cover {
   width: 78px;
   height: 110px;
@@ -312,7 +348,7 @@ hr.divider {
   }
   .story-block {
     margin-top: 110px; 
-    padding: 32px 16px;
+    padding: 36px 18px;
     gap: 16px;
   }
   .card { padding: 16px; gap: 16px; }
@@ -324,6 +360,8 @@ hr.divider {
 <body>
 
 <section class="hero">
+  <div class="hero-grain-texture"></div>
+
   <div class="eyebrow-wrap">
     <div class="eyebrow">우면도서관 북큐레이션 | 청소년실</div>
     <div class="eyebrow" style="color:#2fa339; font-weight:700; letter-spacing: 0;">Youth Zone</div>
