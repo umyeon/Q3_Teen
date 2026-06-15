@@ -3,39 +3,42 @@
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>어둠 속의 목격자들 — 프리미엄 에디토리얼</title>
+<title>어둠 속의 목격자들</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 
 <style>
-/* 기본 초기화 */
+/* ════════════════════════════════
+   1. 글로벌 디자인 시스템 & 초기화
+   ════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
-  background:#f4f2ed;
+  background:#efede8; /* 단정하고 우아한 현실 세계의 에디토리얼 베이지 */
   color:#111111;
   font-family:'Pretendard', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 거친 잔혹동화 감성을 자극하는 미세 필름 노이즈 오버레이 */
+.hero-grain-texture {
+  position: absolute;
+  inset: 0; width: 100%; height: 100%;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* ════════════════════════════════
-   고급 디테일 1: 필름 노이즈(Grain) 텍스처
+   2. 시네마틱 히어로 레이아웃 (모순의 공간)
    ════════════════════════════════ */
-.noise-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  content: "";
-  opacity: 0.04; /* 아주 미세하게 배치 */
-  pointer-events: none;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* 시네마틱 히어로 */
 .hero{
-  background:#f4f2ed;
-  padding:60px 24px 80px;
+  background:#efede8;
+  padding:50px 24px 60px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -44,126 +47,140 @@ body{
 
 .eyebrow-wrap{
   width:100%;
-  max-width:680px;
+  max-width:640px;
   display:flex;
   justify-content:space-between;
   align-items: center;
   margin-bottom:40px;
-  border-bottom: 1px solid rgba(0,0,0,0.07);
-  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 14px;
 }
 .eyebrow{
   font-size:11px;
   font-weight:600;
-  letter-spacing:.1em;
+  letter-spacing:.08em;
   text-transform: uppercase;
-  color: #666;
+  color: #666666;
 }
 
 /* ════════════════════════════════
-   고급 디테일 2: 심연의 다층 아치 프레임
+   3. 거대한 아치(Portal) & 3중 유기적 안개 애니메이션
    ════════════════════════════════ */
-.portal-container {
+.portal-frame {
   position: relative;
   width: 100%;
-  max-width: 640px;
-  height: 760px;
-  background: #000000;
-  border-radius: 320px 320px 0 0;
-  box-shadow: 
-    0 40px 90px rgba(0,0,0,0.3),
-    inset 0 0 50px rgba(92, 212, 72, 0.1); /* 안쪽으로 스며드는 불길한 초록 안개 */
+  max-width: 500px;
+  height: 640px;
+  background: #000000; /* 어떠한 빛도 투과하지 못하는 완벽한 심연 */
+  border-radius: 250px 250px 0 0; /* 완벽한 기하학적 석조 아치 구현 */
+  box-shadow: 0 40px 90px rgba(0,0,0,0.25);
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 200px 40px 0;
+  margin-bottom: 90px; /* 타이틀 오버랩 정밀 제어를 위한 마진 */
 }
 
-/* 고급 디테일 3: 숨쉬는 유기적 불빛 애니메이션 (독버섯/나비) */
-.portal-container::before {
-  content: '';
+/* 애니메이션 레이어 A: 동화 속의 형광 초록 안개 (바닥에서 일렁임) */
+.portal-mist-green {
   position: absolute;
-  bottom: 120px;
-  left: -20px;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(255, 30, 30, 0.25) 0%, transparent 70%);
-  animation: eerie-pulse 9s infinite ease-in-out alternate;
-  pointer-events: none;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130%;
+  height: 50%;
+  background: radial-gradient(ellipse at 50% 100%, #2fa339 0%, rgba(92, 212, 72, 0.35) 45%, transparent 75%);
+  filter: blur(8px);
+  animation: pulse-green 7s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+  z-index: 1;
 }
-.portal-container::after {
-  content: '';
+
+/* 애니메이션 레이어 B: 몽환적인 보라색 독기 (우측 상단 균열) */
+.portal-mist-purple {
   position: absolute;
-  top: 150px;
-  right: -40px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(255, 136, 0, 0.15) 0%, rgba(138, 43, 226, 0.18) 50%, transparent 70%);
-  animation: eerie-pulse 12s infinite ease-in-out alternate-reverse;
-  pointer-events: none;
+  top: 25%;
+  right: -15%;
+  width: 70%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.22) 0%, transparent 75%);
+  animation: drift-purple 11s infinite alternate cubic-bezier(0.37, 0, 0.63, 1);
+  z-index: 2;
 }
 
-@keyframes eerie-pulse {
-  0% { transform: scale(0.9) translate(0, 0); opacity: 0.7; }
-  100% { transform: scale(1.1) translate(20px, -10px); opacity: 1; }
+/* 애니메이션 레이어 C: 불길한 핏빛 기운 (좌측 중단 독버섯 포자) */
+.portal-mist-red {
+  position: absolute;
+  bottom: 25%;
+  left: -10%;
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(255, 30, 30, 0.15) 0%, transparent 70%);
+  animation: drift-red 9s infinite alternate cubic-bezier(0.33, 1, 0.68, 1);
+  z-index: 2;
 }
 
-/* 심연 속 고독한 타이포그래피 */
-.floating-copy {
+@keyframes pulse-green {
+  0% { transform: translateX(-50%) scaleY(0.9) translateY(10px); opacity: 0.75; }
+  100% { transform: translateX(-50%) scaleY(1.1) translateY(0); opacity: 1; }
+}
+@keyframes drift-purple {
+  0% { transform: translate(0, 0) scale(0.95); }
+  100% { transform: translate(-30px, -20px) scale(1.15); }
+}
+@keyframes drift-red {
+  0% { transform: translate(0, 0) scale(1.1); }
+  100% { transform: translate(25px, 15px) scale(0.9); }
+}
+
+/* 심연 속에 고독하게 떠오른 서정적 메인 카피 */
+.portal-interior-text {
+  position: absolute;
+  top: 36%; left: 0; right: 0;
+  text-align: center;
+  color: #f4f0e6;
   font-family: 'Noto Serif KR', serif;
   font-weight: 200;
-  font-size: clamp(22px, 5vw, 28px);
-  line-height: 2.0;
-  color: #ffffff;
-  text-align: center;
-  letter-spacing: 0.05em;
+  font-size: clamp(20px, 4.5vw, 25px);
+  line-height: 1.9;
+  letter-spacing: 0.06em;
   z-index: 5;
-  animation: text-float 6s infinite ease-in-out;
+  text-shadow: 0 0 15px rgba(255,255,255,0.12);
+  animation: text-breathing 5s infinite ease-in-out;
 }
 
-@keyframes text-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* 쨍한 동화 속 바닥 */
-.abyss-floor {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 260px;
-  background: linear-gradient(to top, #1b8524 0%, #5cd448 50%, rgba(0,0,0,0) 100%);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 4;
+@keyframes text-breathing {
+  0%, 100% { transform: translateY(0); opacity: 0.85; }
+  50% { transform: translateY(-4px); opacity: 1; }
 }
 
 /* ════════════════════════════════
-   고급 디테일 4: 글자 반전 기법 (mix-blend-mode)
+   4. 고난도 하이엔드 타이포그래피 (수학적 반전 분리)
    ════════════════════════════════ */
-.main-title-eng {
-  font-family: 'Pretendard', sans-serif;
-  font-weight: 900;
-  font-size: clamp(42px, 9vw, 72px);
-  color: #ffffff;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+.portal-absolute-title {
+  position: absolute;
+  bottom: -33px; /* 아치문과 베이지 바탕의 경계선에 한 치의 오차도 없이 걸치도록 고정 */
+  left: 0; right: 0;
   text-align: center;
-  transform: translateY(35px); /* 경계선에 절묘하게 걸치도록 유도 */
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 900;
+  font-size: clamp(38px, 8.5vw, 72px);
+  color: #ffffff; /* 순백색 설정 */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
   z-index: 10;
-  mix-blend-mode: exclusion; /* 배경색에 따라 글자색이 이질적으로 왜곡됨 */
+  pointer-events: none;
+  /* 믹스 블렌드 모드 발동: 블랙 배경 위에선 화이트로, 베이지 배경 위에선 다크 차콜로 정밀 자동 분리 */
+  mix-blend-mode: difference; 
 }
 
-/* 에디토리얼 스토리 블록 */
+/* ════════════════════════════════
+   5. 정갈한 에디토리얼 스토리 블록
+   ════════════════════════════════ */
 .story-block {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 50px;
+  grid-template-columns: 80px 1fr;
+  gap: 45px;
   width: 100%;
   max-width: 640px;
-  margin: 100px auto 30px;
+  margin: 40px auto 10px;
   align-items: start;
 }
 
@@ -171,43 +188,47 @@ body{
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-family: 'Pretendard', sans-serif;
-  font-weight: 900;
-  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 850;
+  font-size: 28px;
   color: #111111;
-  letter-spacing: 0.06em;
-  line-height: 1.0;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
   border-left: 2px solid #111111;
-  padding-left: 15px;
+  padding-left: 14px;
 }
 
 .editorial-text {
   font-family: 'Noto Serif KR', serif;
   font-size: 16.5px;
-  line-height: 2.3;
-  color: #2b2b2b;
+  line-height: 2.15;
+  color: #2c2c2c;
   font-weight: 400;
 }
 .editorial-text p {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
-.editorial-text p:last-child { margin-bottom: 0; }
+.editorial-text p:last-child {
+  margin-bottom: 0;
+}
 
-/* 본문 리스트 */
+/* ════════════════════════════════
+   6. 본문 콘텐츠 섹션 & 프리미엄 호저 잔상
+   ════════════════════════════════ */
 hr.divider{
   border:none;
   border-top:1px solid rgba(0, 0, 0, 0.08);
-  margin:60px 0 0;
+  margin:50px 24px 0;
 }
 
 .notice{
   max-width: 760px;
-  margin: 40px auto 10px;
-  padding: 16px 24px;
+  margin: 36px auto 10px;
+  padding:15px 24px;
   background: #ffffff;
-  border: 1px dashed rgba(0,0,0,0.15);
-  border-radius: 8px;
-  font-size: 13px;
-  color: #555555;
+  border:1px dashed rgba(0, 0, 0, 0.15);
+  border-radius:10px;
+  font-size:13px;
+  color:#555555;
   text-align: center;
 }
 
@@ -217,17 +238,19 @@ hr.divider{
   padding:0 16px 120px;
 }
 
-.section{ margin-top: 90px; }
+.section{
+  margin-top:80px;
+}
 .section-no{
   font-size:11px;
   color:#8a8075;
-  letter-spacing:.3em;
+  letter-spacing:.25em;
   font-weight: 700;
   margin-bottom:8px;
 }
 .section-title{
   font-family:'Noto Serif KR', serif;
-  font-size:32px;
+  font-size:30px;
   font-weight:700;
   color:#111111;
   margin-bottom:6px;
@@ -235,41 +258,42 @@ hr.divider{
 .section-desc{
   font-size:14px;
   color:#666666;
-  margin-bottom:32px;
+  margin-bottom:28px;
 }
 
-/* ════════════════════════════════
-   고급 디테일 5: 심연의 잔상이 번지는 호버 이펙트
-   ════════════════════════════════ */
+/* 책 목록 프리미엄 카드 */
 .card{
   display:flex;
-  gap:28px;
+  gap:24px;
   align-items:center;
   background:#ffffff;
   border:1px solid rgba(0, 0, 0, 0.04);
   border-radius:16px;
-  padding:24px;
-  margin:20px 0;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.01);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding:22px;
+  margin:18px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.01);
   position: relative;
+  /* 부드러운 하이엔드 입체 트랜지션 적용 */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0 4px cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
 }
+
+/* 마우스를 올렸을 때 아치 속 형광 초록의 이질적 잔상이 뿜어져 나오는 핵심 이펙트 */
 .card:hover{
-  transform: translateY(-5px);
-  /* 마우스를 올리면 동화 속 불길한 초록빛이 은은하게 카드를 감싸며 왜곡을 연결함 */
-  box-shadow: 0 20px 40px rgba(92, 212, 72, 0.12);
-  border-color: rgba(92, 212, 72, 0.3);
-  background: #fafbfa;
+  transform: translateY(-4px);
+  background: #ffffff;
+  border-color: rgba(92, 212, 72, 0.35); /* 은은한 초록 경계선 경고 */
+  /* 깊고 선명하게 번지는 완벽한 형광 초록 백라이트 구현 */
+  box-shadow: 0 20px 40px rgba(92, 212, 72, 0.16); 
 }
 
 .cover{
-  width:85px;
-  height:120px;
+  width:78px;
+  height:110px;
   object-fit:cover;
   border-radius:6px;
   flex-shrink:0;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: transform 0.3s;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
 }
 .card:hover .cover {
   transform: scale(1.03) rotate(-1deg);
@@ -277,64 +301,90 @@ hr.divider{
 
 .title{
   font-family:'Noto Serif KR', serif;
-  font-size: 17px;
+  font-size: 16.5px;
   font-weight:700;
-  margin-bottom:8px;
+  margin-bottom:6px;
   line-height:1.4;
   color:#111111;
 }
 .author{
   font-size:13px;
   color:#666666;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 .call{
   display: inline-block;
   font-size:11px;
   font-weight: 600;
-  color:#73695e;
-  background: #edeae4;
-  padding: 3px 10px;
+  color:#7a7065;
+  background: #edeae3;
+  padding: 3px 9px;
   border-radius: 4px;
   letter-spacing: 0.02em;
 }
 
-/* 반응형 모바일 */
+/* ════════════════════════════════
+   7. 미디어 쿼리 (모바일 환경 가독성 확보)
+   ════════════════════════════════ */
 @media(max-width:600px){
-  .portal-container { height: 580px; padding-top: 140px; }
-  .abyss-floor { height: 200px; }
-  .main-title-eng { transform: translateY(25px); }
-  .story-block { grid-template-columns: 1fr; gap: 24px; }
+  .portal-frame {
+    height: 480px;
+    border-radius: 190px 190px 0 0;
+    margin-bottom: 60px;
+  }
+  .portal-absolute-title {
+    font-size: clamp(32px, 7.5vw, 46px);
+    bottom: -20px;
+  }
+  .story-block {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 8px;
+  }
   .vertical-title {
     writing-mode: horizontal-tb;
     border-left: none;
     border-bottom: 2px solid #111111;
-    padding-left: 0; padding-bottom: 6px;
-    display: inline-block; width: fit-content;
+    padding-left: 0;
+    padding-bottom: 6px;
+    display: inline-block;
+    width: fit-content;
+    font-size: 24px;
   }
-  .card { padding: 20px; gap: 20px; }
+  .card {
+    padding: 16px;
+    gap: 16px;
+  }
+  .cover {
+    width: 68px;
+    height: 96px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="noise-overlay"></div>
-
 <section class='hero'>
+  <div class="hero-grain-texture"></div>
+
   <div class='eyebrow-wrap'>
-    <div class='eyebrow'>우면도서관 북큐레이션</div>
-    <div class='eyebrow' style="color:#5cd448;">youth room</div>
+    <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
+    <div class='eyebrow' style="color:#2fa339; letter-spacing: 0;">YOUTH</div>
   </div>
 
-  <div class='portal-container'>
-    <div class='floating-copy'>
-      모든 비밀은<br>누군가의 발견을 기다린다
+  <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div class='portal-frame'>
+      <div class="portal-mist-green"></div>
+      <div class="portal-mist-purple"></div>
+      <div class="portal-mist-red"></div>
+      
+      <div class='portal-interior-text'>
+        모든 비밀은<br>누군가의 발견을 기다린다
+      </div>
     </div>
-    
-    <div class='abyss-floor'>
-      <h1 class='main-title-eng'>Where Secrets Grow</h1>
-    </div>
+
+    <h1 class='portal-absolute-title'>Where Secrets Grow</h1>
   </div>
 
   <div class='story-block'>
@@ -483,7 +533,7 @@ hr.divider{
     
     <div class='card'>
       <a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'>
-        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득'>
+        <img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여'>
       </a>
       <div>
         <div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div>
