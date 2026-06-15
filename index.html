@@ -64,7 +64,7 @@ body{
 }
 
 /* ════════════════════════════════
-   3. 거대한 아치(Portal) & 흡입형 유기적 안개 애니메이션 복원
+   3. 거대한 아치(Portal) & 흡입형 유기적 안개 애니메이션
    ════════════════════════════════ */
 .portal-frame {
   position: relative;
@@ -154,65 +154,58 @@ body{
 }
 
 /* ════════════════════════════════
-   4. 영문 타이틀 영역 (아치와 중첩 해제)
+   4. 영문 타이틀 영역 (문제 1 해결 완료)
    ════════════════════════════════ */
 .portal-absolute-title {
-  margin-top: 32px; /* 지적사항 반영: 아치 프레임 하단과 명확히 분리하여 중첩 해제 */
+  margin-top: 32px;
   text-align: center;
-  font-family: 'Noto Serif KR', serif;
+  font-family: 'Pretendard', sans-serif; /* 프리텐다드 폰트 적용 */
   font-weight: 900;
-  font-size: clamp(34px, 7.5vw, 68px);
-  color: #111111; /* 베이지 바탕 위에 우뚝 서는 차콜 블랙 서체 */
+  font-size: clamp(16px, 4.5vw, 46px); /* 아치 가로 폭을 절대 넘지 않는 안전 스케일링 */
+  color: #111111; 
   letter-spacing: -0.02em;
   text-transform: uppercase;
   line-height: 1;
   z-index: 10;
   pointer-events: none;
-  white-space: nowrap; /* 모바일에서도 절대 줄바꿈 금지 봉인 */
+  white-space: nowrap; /* 자동 줄바꿈 절대 방지 */
 }
 
 /* ════════════════════════════════
-   5. 정갈한 에디토리얼 스토리 블록 (여백 & 세로 디자인 구현)
+   5. 에디토리얼 스토리 블록 (문제 2 & 3 해결 완료)
    ════════════════════════════════ */
 .story-block {
   display: flex;
-  gap: 40px;
+  gap: 36px;
   width: 100%;
   max-width: 640px;
-  margin: 130px auto 30px; /* 지적사항 반영: 영문 타이틀과 겹치지 않도록 압도적인 스페이싱 확보 */
+  margin: 130px auto 30px; /* 영문 타이틀 하단과 중첩 방지 안전 여백 확보 */
   padding: 0 16px;
-  align-items: start;
+  align-items: stretch; /* 세로선이 글자단 높이에 맞춰 꽉 차게 연장 */
 }
 
-/* 제목과 선을 감싸는 컨테이너 */
-.vertical-title-container {
-  display: flex;
-  flex-direction: row-reverse; /* 세로선이 글자 왼쪽에 완벽히 밀착하도록 조율 */
-  align-items: stretch;
-  gap: 20px;
-  flex-shrink: 0;
-}
-
-/* 지적사항 반영: 한글 타이틀 세로 정렬 */
+/* 문제 2 해결: 한글 세로 정렬 타이틀 (세로선의 왼쪽에 고정되도록 마크업 순서 연동) */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-family: 'Noto Serif KR', serif;
   font-weight: 900;
-  font-size: clamp(26px, 5vw, 34px);
+  font-size: clamp(24px, 4.5vw, 34px);
   color: #111111;
   letter-spacing: 0.12em;
   line-height: 1.0;
+  flex-shrink: 0;
 }
 
-/* 지적사항 반영: 세로로 흐르는 조형적 라인 도형 */
-.vertical-divider-line {
+/* 문제 2 해결: 중앙 분리 기능의 단단한 세로 직선 */
+.vertical-line {
   width: 2px;
   background: #111111;
-  align-self: stretch; /* 글자 높이에 맞춰 선이 정교하게 늘어남 */
+  flex-shrink: 0;
+  align-self: stretch;
 }
 
-/* 지적사항 반영: 가독성을 위해 가로로 흐르며, 쉼표 기준 줄바꿈만 엄격히 적용된 소개글 */
+/* 가독성을 보존하여 세로선 오른쪽에 안착한 가로형 소개글 */
 .editorial-text {
   flex: 1;
   font-family: 'Noto Serif KR', serif;
@@ -221,6 +214,8 @@ body{
   color: #2c2c2c;
   font-weight: 400;
   padding-top: 4px;
+  /* 문제 3 해결: 어절 단위 홀딩으로 쉼표가 없는 좁은 모바일 뷰에서의 무분별한 쪼개짐 제거 */
+  word-break: keep-all; 
 }
 .editorial-text p {
   margin-bottom: 24px;
@@ -230,7 +225,7 @@ body{
 }
 
 /* ════════════════════════════════
-   6. 본문 콘텐츠 섹션 (수정 금지 영역 - 100% 완전 복원)
+   6. 본문 콘텐츠 섹션 (수정 금지 영역 - 100% 원본 동결 보존)
    ════════════════════════════════ */
 hr.divider{
   border:none;
@@ -296,7 +291,7 @@ hr.divider{
   transform: translateY(-5px);
   background: #ffffff;
   border-color: rgba(92, 212, 72, 0.45); 
-  box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22); /* 아치속 형광초록 백라이트 잔상 효과 */
+  box-shadow: 0 25px 50px rgba(92, 212, 72, 0.22);
 }
 
 .cover{
@@ -337,16 +332,31 @@ hr.divider{
 }
 
 /* ════════════════════════════════
-   7. 미디어 쿼리 (모바일 환경 안전성 제어)
+   7. 미디어 쿼리 (모바일 환경 안전성 패치)
    ════════════════════════════════ */
 @media(max-width:600px){
   .portal-frame {
     height: 480px;
     border-radius: 190px 190px 0 0;
   }
+  .portal-absolute-title {
+    font-size: 20px; /* 문제 1: 모바일 최적화 고정 수치 반영 */
+    margin-top: 20px;
+  }
   .story-block {
-    gap: 20px;
-    margin-top: 100px; /* 모바일 대응 추가 간격 버퍼 */
+    gap: 16px; /* 모바일 폭 배분 공간 극대화 */
+    margin-top: 110px; /* 중첩 완전 차단용 물리 버퍼 */
+    padding: 0 12px;
+  }
+  .vertical-title {
+    font-size: 20px; /* 세로쓰기 방향 유지하며 가로 폭 최적화 */
+  }
+  .vertical-line {
+    width: 1.5px;
+  }
+  .editorial-text {
+    font-size: 13.5px; /* 문제 3: 글자 크기를 작게 조율하여 단어가 쪼개져 툭툭 떨어지는 강제 줄바꿈 현상 전면 완화 */
+    line-height: 1.9;
   }
   .card { padding: 16px; gap: 16px; }
   .cover { width: 68px; height: 96px; }
@@ -379,10 +389,9 @@ hr.divider{
   </div>
 
   <div class='story-block'>
-    <div class="vertical-title-container">
-      <div class='vertical-title'>어둠 속의 목격자들</div>
-      <div class="vertical-divider-line"></div>
-    </div>
+    <div class='vertical-title'>어둠 속의 목격자들</div>
+    
+    <div class="vertical-line"></div>
 
     <div class='editorial-text'>
       <p>어떤 문은 열지 않는 편이 좋습니다.</p>
