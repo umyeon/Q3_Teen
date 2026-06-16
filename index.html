@@ -38,14 +38,13 @@ body {
   position: relative;
 }
 
-/* 수정사항 1 반영: 아치의 크기와 정교한 그리드 일치감을 주기 위해 투명 라인 디자인으로 개편 */
 .eyebrow-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px 14px;
   width: 100%;
-  max-width: min(440px, 82vw); /* 아치 가로폭과 고정 싱크 매칭 */
+  max-width: min(440px, 82vw); 
   margin: 0 auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
@@ -149,12 +148,11 @@ body {
   text-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
-/* 수정사항 2 반영: 텍스트 장평 분배율 계산을 통해 아치 가로폭에 완벽 안착 고정 크기 제어 */
 .portal-title {
   margin-top: 24px;
   font-family: 'Pretendard', sans-serif;
   font-weight: 900;
-  font-size: clamp(16px, 5.5vw, 29px); /* 아치 최대 폭을 넘어설 수 없는 최적 스케일링 */
+  font-size: clamp(16px, 5.5vw, 29px); 
   color: #111111;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -263,12 +261,6 @@ hr.divider {
   padding: 20px;
   margin: 16px 0;
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-  transition: transform 0.2s, background 0.2s;
-}
-
-.card:hover {
-  background: #faf9f6;
-  transform: translateY(-2px);
 }
 
 .cover { width: 78px; height: 110px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #e0ded9; }
@@ -300,7 +292,46 @@ hr.divider {
   display: inline-block;
 }
 
-/* 6. 모바일 해상도 가독성 고정 패치 */
+/* 6. [1번 효과] 영화 포스터풍 Dissolve & Emerge 스크롤 애니메이션 시스템 */
+.scroll-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(30px);
+  will-change: opacity, filter, transform;
+}
+
+/* 소개글 전용 부드러운 스며듦 템포 */
+.story-block.scroll-reveal {
+  transition: opacity 1.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+              filter 1.4s cubic-bezier(0.215, 0.61, 0.355, 1),
+              transform 1.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* 책 카드 전용 호버 인터랙션과 공존형 복합 트랜지션 조율 */
+.card.scroll-reveal {
+  transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+              filter 1.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+              transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+              background 0.2s;
+}
+
+/* 감지 시 활성화되는 복원 코어 */
+.scroll-reveal.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* 애니메이션이 완전히 완결된 이후에만 부드러운 마우스 호버 반응 전환 허용 */
+.card.scroll-reveal.active {
+  transition: transform 0.2s, background 0.2s;
+}
+.card.scroll-reveal.active:hover {
+  background: #faf9f6;
+  transform: translateY(-2px);
+}
+
+/* 7. 모바일 해상도 가독성 고정 패치 */
 @media(max-width:600px){
   .story-block { padding: 36px 20px; gap: 16px; margin-top: 35vh; }
   .vertical-title { padding-right: 16px; }
@@ -336,7 +367,7 @@ hr.divider {
       <div class='portal-title'>Where Secrets Grow</div>
     </div>
 
-    <div class='story-block'>
+    <div class='story-block scroll-reveal'>
       <div class='vertical-title'>어둠 속의 목격자들</div>
 
       <div class='editorial-text'>
@@ -361,7 +392,7 @@ hr.divider {
 
 <div class='wrap'>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781627657662" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781627657662.jpg" alt="Doll bones">
     </a>
@@ -372,7 +403,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780060530945" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780060530945.jpg" alt="The Graveyard Book">
     </a>
@@ -383,7 +414,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781250250445" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781250250445.jpg" alt="Scary Stories for Young Foxes">
     </a>
@@ -394,7 +425,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593620281" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593620281.jpg" alt="The Collectors : Stories">
     </a>
@@ -405,7 +436,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593123478" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593123478.jpg" alt="The Dark-thirty">
     </a>
@@ -416,7 +447,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780142401200" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780142401200.jpg" alt="THE WESTING GAME">
     </a>
@@ -427,7 +458,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780763694494" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780763694494.jpg" alt="Splendors and glooms">
     </a>
@@ -438,7 +469,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/1250073677" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/5536/91/cover500/1250073677_2.jpg" alt="The Ghosts of heaven">
     </a>
@@ -449,7 +480,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0312547978" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/4334/96/cover500/0312547978_2.jpg" alt="Revolver">
     </a>
@@ -460,7 +491,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375866272" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/1251/56/cover500/0375866272_1.jpg" alt="Jasper Jones">
     </a>
@@ -471,7 +502,7 @@ hr.divider {
     </div>
   </div>
 
-  <div class="card">
+  <div class="card scroll-reveal">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375850864" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/723/21/cover500/0375850864ff_1.jpg" alt="When you reach me">
     </a>
@@ -483,5 +514,29 @@ hr.divider {
   </div>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -8% 0px', /* 화면 하단 진입 직전에 자연스럽게 작동 */
+    threshold: 0.01
+  };
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); /* 단 한 번만 고급스럽게 일어남 */
+      }
+    });
+  }, observerOptions);
+  
+  revealElements.forEach(el => observer.observe(el));
+});
+</script>
+
 </body>
 </html>
