@@ -40,8 +40,11 @@ body {
 
 .eyebrow-wrap {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 32px 10px;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -56,18 +59,20 @@ body {
   font-weight: 500;
 }
 
-/* 3. 거대한 아치(Portal) & 3중 흡입 안개 애니메이션 복원 */
+/* 3. 거대한 아치(Portal) & 3중 흡입 안개 애니메이션 (수정사항 1 반영) */
 .portal-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0 60px;
+  margin: 20px 0 0;
   position: relative;
+  min-height: calc(100vh - 140px); /* 첫 화면을 아치 구역으로 가득 채워 다음 영역 분리 */
+  justify-content: center;
 }
 
 .portal {
   width: min(440px, 82vw);
-  height: 560px;
+  height: clamp(480px, 68vh, 580px); /* 화면 세로 한계를 넘어 잘리지 않도록 안전 제한 */
   border-radius: 240px 240px 0 0;
   background: #000000;
   position: relative;
@@ -144,34 +149,35 @@ body {
   text-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
-/* 아치와 중첩을 해제하고 프리텐다드를 입힌 정갈한 영문 서체 */
+/* 수정사항 1 반영: 아치 가로폭에 완벽히 대응하도록 비례 폰트 사이즈 연동 계산 처리 */
 .portal-title {
-  margin-top: 28px;
+  margin-top: 24px;
   font-family: 'Pretendard', sans-serif;
   font-weight: 900;
-  font-size: clamp(22px, 5.5vw, 42px);
+  font-size: clamp(20px, 7.6vw, 41.5px);
   color: #111111;
   letter-spacing: -0.01em;
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
+  width: min(440px, 82vw);
+  text-align: center;
 }
 
-/* 4. 소개글 영역 (요구사항 반영: 촌스러움을 완전히 빼고 밤안개로 세련되게 변주한 디자인) */
+/* 4. 소개글 영역 (수정사항 2 반영: 첫 화면에서 완벽히 격리되도록 세로 여백 증폭) */
 .story-block {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 32px;
   max-width: 680px;
-  margin: 0 auto 40px;
+  margin: 32vh auto 60px; /* 32vh의 거대한 버퍼로 스크롤 시에만 보이도록 차단 완료 */
   padding: 45px 36px;
-  background: #09090b; /* 깊은 밤의 묵색 무광 패널 */
+  background: #09090b; 
   position: relative;
   overflow: hidden;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
 }
 
-/* 가독성을 해치지 않도록 불투명도를 극도로 낮추어 은은하게 움직이는 배후의 스크린 안개 변주 */
 .story-block::before {
   content: '';
   position: absolute;
@@ -195,7 +201,6 @@ body {
   z-index: 2;
 }
 
-/* 타이틀과 설명글을 완전히 가로막아 서사적 긴장감을 주는 에디토리얼 세로선 구현 */
 .vertical-title {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -206,7 +211,7 @@ body {
   color: #e2e2e8;
   line-height: 1;
   padding-right: 28px;
-  border-right: 1px solid rgba(255, 255, 255, 0.12); /* 깔끔하고 얇은 슬림 분리선 장착 */
+  border-right: 1px solid rgba(255, 255, 255, 0.12); 
 }
 
 .editorial-text {
@@ -214,69 +219,50 @@ body {
   font-family: 'Noto Serif KR', serif;
   font-size: clamp(14px, 3.8vw, 17px);
   line-height: 2.2;
-  color: #b8b8c2; /* 차분하고 고급스럽게 가라앉은 고스트 실버 */
+  color: #b8b8c2; 
   font-weight: 300;
-  word-break: keep-all; /* 모바일 문자 파편화 현상 완전 봉쇄 */
+  word-break: keep-all; 
 }
 
 .editorial-text p { margin-bottom: 24px; }
 .editorial-text p:last-child { margin-bottom: 0; }
 
-/* 5. 도서 목록 섹션 레이아웃 (원본 무수정 100% 동결 구역) */
+/* 5. 도서 목록 섹션 레이아웃 */
 hr.divider {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin: 60px 20px 0;
 }
 
+/* 수정사항 3 반영: 모바일 해상도에서도 줄바꿈 현상이 절대 유발되지 않도록 반응형 가변 축소 및 중앙화 */
 .notice {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; /* 가운데 정렬 */
+  gap: 10px;
   max-width: 760px;
-  margin: 28px auto 10px;
+  margin: 40px auto 20px;
   padding: 14px 18px;
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 14px;
-  font-size: 13px;
+  font-size: clamp(11px, 3.3vw, 15px); /* 줄바꿈 억제 스케일 튜닝 */
   font-family: 'Pretendard', sans-serif;
   color: #555555;
   letter-spacing: -.02em;
+  white-space: nowrap; /* 절대 줄바꿈 금지 */
+  text-align: center;
 }
 
-.wrap { max-width: 760px; margin: auto; padding: 0 16px 80px; }
-.section { margin-top: 64px; }
-
-.section-no {
-  font-size: 11px;
-  color: #5a5550;
-  letter-spacing: .2em;
-  font-family: 'Pretendard', sans-serif;
-  margin-bottom: 6px;
-}
-
-.section-title {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: #111111;
-  margin-bottom: 4px;
-}
-
-.section-desc {
-  font-size: 14px;
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 300;
-  color: #6a6560;
-  margin-bottom: 20px;
-}
+.wrap { max-width: 760px; margin: auto; padding: 10px 16px 80px; }
 
 .card {
-  display: flex; gap: 16px; align-items: center;
+  display: flex; gap: 24px; align-items: center;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 18px;
-  padding: 16px;
-  margin: 10px 0;
+  padding: 20px;
+  margin: 16px 0;
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
   transition: transform 0.2s, background 0.2s;
 }
@@ -286,11 +272,12 @@ hr.divider {
   transform: translateY(-2px);
 }
 
-.cover { width: 72px; height: 102px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #e0ded9; }
+.cover { width: 78px; height: 110px; object-fit: cover; border-radius: 10px; flex-shrink: 0; background: #e0ded9; }
 
 .title {
   font-family: 'Noto Serif KR', serif;
   font-weight: 700;
+  font-size: 16.5px;
   margin-bottom: 6px;
   line-height: 1.4;
   color: #111111;
@@ -314,16 +301,13 @@ hr.divider {
   display: inline-block;
 }
 
-/* 6. 모바일 해상도 방어 튜닝 */
-@media(max-width:480px){
-  .portal-wrap { margin-bottom: 45px; }
-  .portal { height: 420px; }
-  .story-block { padding: 36px 20px; gap: 16px; }
+/* 6. 모바일 해상도 가독성 고정 패치 */
+@media(max-width:600px){
+  .story-block { padding: 36px 20px; gap: 16px; margin-top: 35vh; }
   .vertical-title { padding-right: 16px; }
-  .section-title { font-size: 26px; }
-  .card { padding: 12px; gap: 12px; }
-  .cover { width: 60px; height: 85px; }
-  .notice { margin: 20px 12px; font-size: 12px; }
+  .card { padding: 16px; gap: 16px; }
+  .cover { width: 68px; height: 96px; }
+  .notice { margin: 30px 12px; }
   .wrap { padding: 0 12px 60px; }
 }
 </style>
@@ -336,6 +320,7 @@ hr.divider {
 
   <div class='eyebrow-wrap'>
     <div class='eyebrow'>우면도서관 북큐레이션 ｜ 청소년실</div>
+    <div class='eyebrow' style="color:#2fa339; font-weight:700; letter-spacing: 0;">Youth Zone</div>
   </div>
 
   <div class='hero-body'>
@@ -375,13 +360,140 @@ hr.divider {
 <hr class='divider'>
 <div class='notice'>📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
 
+<!-- 수정사항 4 반영: 섹션 구분을 완전히 제거하고 신규 도서 정보 11권 단독 리스트 업데이트 구역 -->
 <div class='wrap'>
 
-<section class='section'><div class='section-no'>SECTION 01</div><div class='section-title'>변화</div><div class='section-desc'>AI는 우리의 일을 어떻게 바꾸는가</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9788936481247' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936481247.jpg' alt='AI가 나보다 일을 잘할 때'></a><div><div class='title'>AI가 나보다 일을 잘할 때</div><div class='author'>김대식 외</div><div class='call'>321.52 김23ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435259/417435257/9788962626605' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788962626605.jpg' alt='먼저 온 미래'></a><div><div class='title'>먼저 온 미래</div><div class='author'>장강명</div><div class='call'>331.54 장12ㅁ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435075/417435055/9791192488776' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192488776.jpg' alt='휴머노이드 : 인간을 닮은 기계, 공존의 시작'></a><div><div class='title'>휴머노이드 : 인간을 닮은 기계, 공존의 시작</div><div class='author'>김상균</div><div class='call'>559.962 김52ㅎ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434303/417434293/9791191311686' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191311686.jpg' alt='진격하는 AI와 흔들리는 노동자'></a><div><div class='title'>진격하는 AI와 흔들리는 노동자</div><div class='author'>이재열 외</div><div class='call'>321.5 롤294ㅈ</div></div></div></section>
+  <!-- 1. Doll bones -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781627657662" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781627657662.jpg" alt="Doll bones">
+    </a>
+    <div>
+      <div class="title">Doll bones</div>
+      <div class="author">Holly Black</div>
+      <div class="call">F 843 B627d</div>
+    </div>
+  </div>
 
-<section class='section'><div class='section-no'>SECTION 02</div><div class='section-title'>적응</div><div class='section-desc'>AI 시대를 살아가는 새로운 역량</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433341/417433319/9791193282342' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193282342.jpg' alt='AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵'></a><div><div class='title'>AI 전략수업 : AI 시대의 유일한 인간 생존 로드맵</div><div class='author'>리더인</div><div class='call'>004.73 리24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417435187/417435176/9791193674260' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193674260.jpg' alt='AI 에이전트 트렌드＆활용백과'></a><div><div class='title'>AI 에이전트 트렌드＆활용백과</div><div class='author'>김덕진 외</div><div class='call'>004.73 김24ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417433342/417433315/9791190488617' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190488617.jpg' alt='AI 시대의 질문력, 프롬프트 엔지니어링'></a><div><div class='title'>AI 시대의 질문력, 프롬프트 엔지니어링</div><div class='author'>류한석</div><div class='call'>004.73 류92ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/423172830/423172828/9791173324253' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324253.jpg' alt='AI 시대, 강력한 개인이 온다'></a><div><div class='title'>AI 시대, 강력한 개인이 온다</div><div class='author'>구본권</div><div class='call'>331.544 구45ㅇ</div></div></div></section>
+  <!-- 2. The Graveyard Book -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780060530945" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780060530945.jpg" alt="The Graveyard Book">
+    </a>
+    <div>
+      <div class="title">The Graveyard Book</div>
+      <div class="author">Neil Gaiman</div>
+      <div class="call">F 843 G141g</div>
+    </div>
+  </div>
 
-<section class='section'><div class='section-no'>SECTION 03</div><div class='section-title'>미래</div><div class='section-desc'>노동의 미래를 상상하다</div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417559632/417559610/9788925577647' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925577647.jpg' alt='일의 역사'></a><div><div class='title'>일의 역사</div><div class='author'>제임스 수즈먼</div><div class='call'>321.509 수77ㅇ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417617397/417617370/9791191183030' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191183030.jpg' alt='새로운 가난이 온다'></a><div><div class='title'>새로운 가난이 온다</div><div class='author'>김만권</div><div class='call'>334 김32ㅅ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417611940/417611920/9791196403850' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196403850.jpg' alt='노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여'></a><div><div class='title'>노동의 미래와 기본소득 : 21세기 빈곤 없는 사회를 위하여</div><div class='author'>앤디 스턴 외</div><div class='call'>321.5 스884ㄴ</div></div></div><div class='card'><a href='https://umyeon.seocholib.or.kr/bookDetail/MO/417434372/417434354/9791143003225' target='_blank' rel='noopener noreferrer'><img class='cover' src='https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791143003225.jpg' alt='AI와 지속 가능한 노동'></a><div><div class='title'>AI와 지속 가능한 노동</div><div class='author'>김주희</div><div class='call'>321.5 김76ㅇ</div></div></div></section>
+  <!-- 3. Scary Stories for Young Foxes -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781250250445" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781250250445.jpg" alt="Scary Stories for Young Foxes">
+    </a>
+    <div>
+      <div class="title">Scary Stories for Young Foxes</div>
+      <div class="author">Christian McKay Heidicker</div>
+      <div class="call">F 843 H465s</div>
+    </div>
+  </div>
+
+  <!-- 4. The Collectors : Stories -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593620281" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593620281.jpg" alt="The Collectors : Stories">
+    </a>
+    <div>
+      <div class="title">The Collectors : Stories</div>
+      <div class="author">A. S. King</div>
+      <div class="call">F 843 K52c</div>
+    </div>
+  </div>
+
+  <!-- 5. The Dark-thirty -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593123478" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593123478.jpg" alt="The Dark-thirty">
+    </a>
+    <div>
+      <div class="title">The Dark-thirty</div>
+      <div class="author">Patricia C. Mckissack</div>
+      <div class="call">F 843 M478d</div>
+    </div>
+  </div>
+
+  <!-- 6. THE WESTING GAME -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780142401200" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780142401200.jpg" alt="THE WESTING GAME">
+    </a>
+    <div>
+      <div class="title">THE WESTING GAME</div>
+      <div class="author">Ellen Raskin</div>
+      <div class="call">F 843 R225w</div>
+    </div>
+  </div>
+
+  <!-- 7. Splendors and glooms -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780763694494" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780763694494.jpg" alt="Splendors and glooms">
+    </a>
+    <div>
+      <div class="title">Splendors and glooms</div>
+      <div class="author">Laura Amy Schlitz</div>
+      <div class="call">F 843 S344s</div>
+    </div>
+  </div>
+
+  <!-- 8. The Ghosts of heaven -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/1250073677" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://image.aladin.co.kr/product/5536/91/cover500/1250073677_2.jpg" alt="The Ghosts of heaven">
+    </a>
+    <div>
+      <div class="title">The Ghosts of heaven</div>
+      <div class="author">Marcus Sedgwick</div>
+      <div class="call">F 843 S448g</div>
+    </div>
+  </div>
+
+  <!-- 9. Revolver -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0312547978" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://image.aladin.co.kr/product/4334/96/cover500/0312547978_2.jpg" alt="Revolver">
+    </a>
+    <div>
+      <div class="title">Revolver</div>
+      <div class="author">Marcus Sedgwick</div>
+      <div class="call">F 843 S448r</div>
+    </div>
+  </div>
+
+  <!-- 10. Jasper Jones -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375866272" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://image.aladin.co.kr/product/1251/56/cover500/0375866272_1.jpg" alt="Jasper Jones">
+    </a>
+    <div>
+      <div class="title">Jasper Jones</div>
+      <div class="author">Craig Silvery</div>
+      <div class="call">F 843 S587j</div>
+    </div>
+  </div>
+
+  <!-- 11. When you reach me -->
+  <div class="card">
+    <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375850864" target="_blank" rel="noopener noreferrer">
+      <img class="cover" src="https://image.aladin.co.kr/product/723/21/cover500/0375850864ff_1.jpg" alt="When you reach me">
+    </a>
+    <div>
+      <div class="title">When you reach me</div>
+      <div class="author">Rebecca Stead</div>
+      <div class="call">F 843 S799w</div>
+    </div>
+  </div>
 
 </div>
 </body>
