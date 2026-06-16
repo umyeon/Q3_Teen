@@ -38,41 +38,41 @@ body {
   position: relative;
 }
 
+/* 수정사항 1 반영: 아치의 크기와 정교한 그리드 일치감을 주기 위해 투명 라인 디자인으로 개편 */
 .eyebrow-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 32px 10px;
-  max-width: 680px;
+  padding: 0 8px 14px;
+  width: 100%;
+  max-width: min(440px, 82vw); /* 아치 가로폭과 고정 싱크 매칭 */
   margin: 0 auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .eyebrow {
   display: inline-flex;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: #111111;
-  color: #ffffff;
   font-size: 11px;
   font-family: 'Pretendard', sans-serif;
-  letter-spacing: .05em;
-  font-weight: 500;
+  letter-spacing: .06em;
+  font-weight: 600;
+  color: #555555;
 }
 
-/* 3. 거대한 아치(Portal) & 3중 흡입 안개 애니메이션 (수정사항 1 반영) */
+/* 3. 거대한 아치(Portal) & 3중 흡입 안개 애니메이션 구역 */
 .portal-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px 0 0;
   position: relative;
-  min-height: calc(100vh - 140px); /* 첫 화면을 아치 구역으로 가득 채워 다음 영역 분리 */
+  min-height: calc(100vh - 140px); 
   justify-content: center;
 }
 
 .portal {
   width: min(440px, 82vw);
-  height: clamp(480px, 68vh, 580px); /* 화면 세로 한계를 넘어 잘리지 않도록 안전 제한 */
+  height: clamp(480px, 68vh, 580px); 
   border-radius: 240px 240px 0 0;
   background: #000000;
   position: relative;
@@ -149,12 +149,12 @@ body {
   text-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
-/* 수정사항 1 반영: 아치 가로폭에 완벽히 대응하도록 비례 폰트 사이즈 연동 계산 처리 */
+/* 수정사항 2 반영: 텍스트 장평 분배율 계산을 통해 아치 가로폭에 완벽 안착 고정 크기 제어 */
 .portal-title {
   margin-top: 24px;
   font-family: 'Pretendard', sans-serif;
   font-weight: 900;
-  font-size: clamp(20px, 7.6vw, 41.5px);
+  font-size: clamp(16px, 5.5vw, 29px); /* 아치 최대 폭을 넘어설 수 없는 최적 스케일링 */
   color: #111111;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -164,13 +164,13 @@ body {
   text-align: center;
 }
 
-/* 4. 소개글 영역 (수정사항 2 반영: 첫 화면에서 완벽히 격리되도록 세로 여백 증폭) */
+/* 4. 소개글 영역 */
 .story-block {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 32px;
   max-width: 680px;
-  margin: 32vh auto 60px; /* 32vh의 거대한 버퍼로 스크롤 시에만 보이도록 차단 완료 */
+  margin: 32vh auto 60px; 
   padding: 45px 36px;
   background: #09090b; 
   position: relative;
@@ -234,11 +234,10 @@ hr.divider {
   margin: 60px 20px 0;
 }
 
-/* 수정사항 3 반영: 모바일 해상도에서도 줄바꿈 현상이 절대 유발되지 않도록 반응형 가변 축소 및 중앙화 */
 .notice {
   display: flex; 
   align-items: center; 
-  justify-content: center; /* 가운데 정렬 */
+  justify-content: center; 
   gap: 10px;
   max-width: 760px;
   margin: 40px auto 20px;
@@ -246,11 +245,11 @@ hr.divider {
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 14px;
-  font-size: clamp(11px, 3.3vw, 15px); /* 줄바꿈 억제 스케일 튜닝 */
+  font-size: clamp(11px, 3.3vw, 15px); 
   font-family: 'Pretendard', sans-serif;
   color: #555555;
   letter-spacing: -.02em;
-  white-space: nowrap; /* 절대 줄바꿈 금지 */
+  white-space: nowrap; 
   text-align: center;
 }
 
@@ -360,10 +359,8 @@ hr.divider {
 <hr class='divider'>
 <div class='notice'>📚 책 표지를 클릭하면 해당 도서를 바로 찾아볼 수 있습니다.</div>
 
-<!-- 수정사항 4 반영: 섹션 구분을 완전히 제거하고 신규 도서 정보 11권 단독 리스트 업데이트 구역 -->
 <div class='wrap'>
 
-  <!-- 1. Doll bones -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781627657662" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781627657662.jpg" alt="Doll bones">
@@ -375,7 +372,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 2. The Graveyard Book -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780060530945" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780060530945.jpg" alt="The Graveyard Book">
@@ -387,7 +383,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 3. Scary Stories for Young Foxes -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9781250250445" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9781250250445.jpg" alt="Scary Stories for Young Foxes">
@@ -399,7 +394,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 4. The Collectors : Stories -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593620281" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593620281.jpg" alt="The Collectors : Stories">
@@ -411,7 +405,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 5. The Dark-thirty -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780593123478" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780593123478.jpg" alt="The Dark-thirty">
@@ -423,7 +416,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 6. THE WESTING GAME -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780142401200" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780142401200.jpg" alt="THE WESTING GAME">
@@ -435,7 +427,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 7. Splendors and glooms -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/9780763694494" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780763694494.jpg" alt="Splendors and glooms">
@@ -447,7 +438,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 8. The Ghosts of heaven -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/1250073677" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/5536/91/cover500/1250073677_2.jpg" alt="The Ghosts of heaven">
@@ -459,7 +449,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 9. Revolver -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0312547978" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/4334/96/cover500/0312547978_2.jpg" alt="Revolver">
@@ -471,7 +460,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 10. Jasper Jones -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375866272" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/1251/56/cover500/0375866272_1.jpg" alt="Jasper Jones">
@@ -483,7 +471,6 @@ hr.divider {
     </div>
   </div>
 
-  <!-- 11. When you reach me -->
   <div class="card">
     <a href="https://umyeon.seocholib.or.kr/bookDetail/MO/426074405/426074403/0375850864" target="_blank" rel="noopener noreferrer">
       <img class="cover" src="https://image.aladin.co.kr/product/723/21/cover500/0375850864ff_1.jpg" alt="When you reach me">
